@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <TextView android:id="@+id/listRowNumberText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:paddingRight="20dp"
+              android:paddingLeft="10dp"
+              android:text="1"
+            />
+    <TextView android:id="@+id/listRowName"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Course name"
+              android:paddingRight="60dp"
+            />
+    <TextView android:id="@+id/listRowPercentComplete"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:paddingRight="40dp"
+              android:text="90%"
+            />
+    <TextView android:id="@+id/listRowScore"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="****"
+            />
+</LinearLayout>

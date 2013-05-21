@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:gravity="center">
+            <EditText android:id="@+id/loginUsername"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="username"
+                      android:inputType="textEmailAddress"
+                      android:capitalize="characters"
+                    />
+            <EditText android:id="@+id/loginPassword"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="Password"
+                      android:password="true"
+                    />
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:gravity="center"
+                    >
+                <Button android:id="@+id/loginButtonLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Login"/>
+                <Button android:id="@+id/loginButtonRegister"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Register"/>
+            </LinearLayout>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:text="Forgot your password"/>
+    </LinearLayout>
+</RelativeLayout>
