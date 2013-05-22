@@ -26,8 +26,7 @@ public class LoginActivity extends VietEdBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTextHeader("Login");
-        this.setShowButton(BUTTON_BACK, false);
-        this.setShowButton(BUTTON_HOME, false);
+        this.actionBar.removeActionAt(0);
 
         this.mainTask = new VoidTask();
         this.mainTask.setRestAsyncTaskListener(this);

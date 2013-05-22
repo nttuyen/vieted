@@ -5,8 +5,13 @@
     android:background="@drawable/main_bg_image"
     android:orientation="vertical" >
 
+    <com.androidteam.base.widget.ActionBar
+            android:id="@+id/actionbar"
+            style="@style/ActionBar"
+            />
+
     <!-- Header -->
-    <RelativeLayout
+    <!--<RelativeLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +64,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="0dp"
             android:background="@drawable/button_home" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <!-- Body -->
     <LinearLayout

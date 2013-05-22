@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.androidteam.base.task.RestAsyncTask;
+import com.androidteam.base.widget.ActionBar;
 import com.vieted.android.app.R;
 import com.vieted.android.app.task.HomeTask;
 import com.vieted.android.app.task.VoidTask;
@@ -22,8 +23,18 @@ public class HomeActivity extends VietEdBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTextHeader("VietEd");
-        this.setShowButton(BUTTON_BACK, false);
-        this.setShowButton(BUTTON_HOME, true);
+        this.actionBar.removeActionAt(0);
+        this.actionBar.addAction(new ActionBar.Action() {
+            @Override
+            public int getDrawable() {
+                return R.drawable.button_home;
+            }
+
+            @Override
+            public void performAction(View view) {
+
+            }
+        });
 
         this.mainTask = new HomeTask();
         this.mainTask.setRestAsyncTaskListener(this);
@@ -32,12 +43,6 @@ public class HomeActivity extends VietEdBaseActivity {
 
     private void initBodyView() {
         this.setLayoutBody(R.layout.activity_body_home);
-        this.btnGlobalHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
         Button myCourseButton = (Button)findViewById(R.id.buttonMyCourse);
         myCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override

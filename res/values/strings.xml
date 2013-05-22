@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">VietEd</string>
     <string name="text_loading">Đang tải...</string>
+    <string name="actionbar_activity_not_found">Failed to open intent...</string>
 </resources>

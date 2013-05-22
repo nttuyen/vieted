@@ -27,6 +27,7 @@ public class CourseListActivity extends VietEdBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTextHeader("My Courses");
+        this.setHomeBackAction();
         this.mainTask = new GetCourseListTask();
         this.mainTask.setRestAsyncTaskListener(this);
         this.mainTask.execute();
