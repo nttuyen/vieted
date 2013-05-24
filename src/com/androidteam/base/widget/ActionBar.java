@@ -36,15 +36,15 @@ import com.vieted.android.app.R;
 
 public class ActionBar extends RelativeLayout implements OnClickListener {
 
-    private LayoutInflater mInflater;
-    private RelativeLayout mBarView;
-    private ImageView mLogoView;
-    private View mBackIndicator;
-    private TextView mTitleView;
-    private LinearLayout mActionsView;
-    private ImageButton mHomeBtn;
-    private RelativeLayout mHomeLayout;
-    private ProgressBar mProgress;
+    protected LayoutInflater mInflater;
+    protected RelativeLayout mBarView;
+    protected ImageView mLogoView;
+    protected View mBackIndicator;
+    protected TextView mTitleView;
+    protected LinearLayout mActionsView;
+    protected ImageButton mHomeBtn;
+    protected RelativeLayout mHomeLayout;
+    protected ProgressBar mProgress;
 
     public ActionBar(Context context, AttributeSet attrs) {
         super(context, attrs);

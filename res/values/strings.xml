@@ -3,4 +3,7 @@
     <string name="app_name">VietEd</string>
     <string name="text_loading">Đang tải...</string>
     <string name="actionbar_activity_not_found">Failed to open intent...</string>
+    <string name="error_player">Error player</string>
+    <string name="playerview_text">Player view</string>
+    <string name="menu_settings">Menu</string>
 </resources>

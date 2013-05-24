@@ -16,6 +16,7 @@
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionbar_item"
     style="@style/ActionBarItem"
+    android:layout_width="wrap_content"
     android:background="@drawable/actionbar_btn"
     android:layout_centerVertical="true"
     android:singleLine="true"

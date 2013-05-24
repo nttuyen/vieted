@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+    <!--<LinearLayout android:id="@+id/lessonExerciseMp3Player"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <Button android:id="@+id/buttonPlayMp3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Play"/>
+        <ProgressBar android:id="@+id/timeline"
+                     style="?android:attr/progressBarStyleHorizontal"
+                     android:layout_width="fill_parent"
+                     android:layout_weight="1"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:paddingLeft="2px"
+                />
+    </LinearLayout>-->
+    <com.androidteam.base.widget.Mp3Player
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mp3Player1"
+        />
+    <com.androidteam.base.widget.Mp3Player
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mp3Player2"
+            android:layout_below="@id/mp3Player1"
+            />
+    <com.androidteam.base.widget.Mp3Player
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mp3Player3"
+            android:layout_below="@id/mp3Player2"
+            />
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/mp3Player3"
+              android:text="Exercise text here"/>
+</RelativeLayout>

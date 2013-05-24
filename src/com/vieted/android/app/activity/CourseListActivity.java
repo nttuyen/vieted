@@ -49,9 +49,9 @@ public class CourseListActivity extends VietEdBaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(CourseListActivity.this, LessonActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                Intent intent = new Intent(CourseListActivity.this, LessonLectureActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         listView.invalidateViews();
