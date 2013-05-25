@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <Button android:id="@+id/buttonMyCourse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Course"/>
-    <Button android:id="@+id/buttonListCourse"
-            android:layout_toRightOf="@id/buttonMyCourse"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="List Course"/>
-    <Button android:id="@+id/buttonProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonMyCourse"
-            android:text="Profile"/>
-    <Button android:id="@+id/buttonPayment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonListCourse"
-            android:layout_toRightOf="@id/buttonProfile"
-            android:text="Payment"/>
-</RelativeLayout>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/buttonMyCourse"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/base_btt"
+            android:text="My Course"
+            android:textColor="@drawable/btn_default" />
+
+        <Button
+            android:id="@+id/buttonListCourse"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/base_btt"
+            android:text="List Course"
+            android:textColor="@drawable/btn_default" />
+
+        <Button
+            android:id="@+id/buttonProfile"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/base_btt"
+            android:text="Profile"
+            android:textColor="@drawable/btn_default" />
+
+        <Button
+            android:id="@+id/buttonPayment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/base_btt"
+            android:text="Payment"
+            android:textColor="@drawable/btn_default" />
+    </LinearLayout>
+
+</RelativeLayout>

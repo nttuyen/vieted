@@ -84,7 +84,7 @@ public class LessonExerciseActivity extends AbstractLessonActivity implements Mp
         this.players.add((Mp3Player)this.findViewById(R.id.mp3Player2));
         this.players.add((Mp3Player)this.findViewById(R.id.mp3Player3));
 
-        this.players.get(0).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/7a9916768cb3e9964b86091677808ddd/519f72d5/2013/05/15/c/9/c9a212f353ea1937ed6535236b7acbd2.mp3");
+        this.players.get(0).setDataSource("http://stream.org.mp3.zdn.vn/fsfsdfdsfdserwrwq3/f22234ddccfa54ad43b9fa5838e990c1/51a08c53/0/00/0009f615a07cc86154fc8dc0e64e387e.mp3");
         this.players.get(1).setDataSource("http://stream2.org.mp3.zdn.vn/fsfsdfdsfdserwrwq3/c0d2fdcabcd56c8744c96ad921c66d79/519f54c5/2013/05/15/2/5/25e96c111d36dbefea68a786876708d7.mp3");
         this.players.get(2).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/a0d20c02ff47d498457951e22c1d9f01/519f731f/2013/05/15/a/4/a47fb0d027a756c57467c242de0a4449.mp3");
 

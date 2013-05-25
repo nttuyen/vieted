@@ -7,4 +7,5 @@
     <color name="actionbar_background_end">#242424</color>
     <color name="actionbar_background_item_pressed_start">#FF7F00</color>
     <color name="actionbar_background_item_pressed_end">#EE7600</color>
+    <color name="blue">#002EB8</color>
 </resources>
