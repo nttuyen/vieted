@@ -1,13 +1,6 @@
 package com.vieted.android.app.activity;
 
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.SurfaceHolder;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import com.androidteam.base.task.RestAsyncTask;
 import com.androidteam.base.widget.Mp3Player;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -24,7 +17,7 @@ import java.util.List;
  * Time: 6:45 PM
  * To change this template use File | Settings | File Templates.
  */
-public class LessonExerciseActivity extends AbstractLessonActivity implements Mp3Player.Listener{
+public class LessonExerciseActivity extends VietEdWithYoutubeBaseActivity implements Mp3Player.Listener{
     private List<Mp3Player> players;
 
     @Override

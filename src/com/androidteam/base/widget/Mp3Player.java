@@ -1,7 +1,6 @@
 package com.androidteam.base.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -32,7 +31,7 @@ public class Mp3Player extends RelativeLayout implements View.OnClickListener, M
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        mBarView = (RelativeLayout) mInflater.inflate(R.layout.mp3_player, null);
+        mBarView = (RelativeLayout) mInflater.inflate(R.layout.widget_mp3_player, null);
         addView(mBarView);
 
         this.playerTimeline = (ProgressBar) mBarView.findViewById(R.id.playerTimeline);

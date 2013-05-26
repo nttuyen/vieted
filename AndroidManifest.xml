@@ -35,5 +35,6 @@
         <activity android:name=".activity.LessonLectureActivity"/>
         <activity android:name=".activity.LessonExerciseActivity"/>
         <activity android:name=".activity.LessonMemoryActivity"/>
+        <activity android:name=".activity.LessonQuizActivity"/>
     </application>
 </manifest> 

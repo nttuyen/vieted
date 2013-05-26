@@ -22,16 +22,12 @@ import java.io.IOException;
  * Time: 5:52 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class AbstractLessonActivity extends YouTubeFailureRecoveryActivity implements RestAsyncTaskListener<RestAsyncTask>, View.OnClickListener {
+public abstract class VietEdWithYoutubeBaseActivity extends YouTubeFailureRecoveryActivity implements RestAsyncTaskListener<RestAsyncTask> {
     protected ProgressDialog progressDialog;
     protected RestAsyncTask mainTask;
 
     protected ActionBar actionBar;
     protected LinearLayout bodyLayout;
-
-    protected Button lessonButtonLecture;
-    protected Button lessonButtonExercise;
-    protected Button lessonButtonMemory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,13 +39,6 @@ public abstract class AbstractLessonActivity extends YouTubeFailureRecoveryActiv
         bodyLayout = (LinearLayout) findViewById(R.id.bodyLayout);
         this.setHomeBackAction();
         this.actionBar.addAction(new ActionBar.IntentAction(this, new Intent(this, HomeActivity.class), R.drawable.button_home));
-
-        this.lessonButtonLecture = (Button)this.findViewById(R.id.lessonButtonLecture);
-        this.lessonButtonExercise = (Button)this.findViewById(R.id.lessonButtonExercise);
-        this.lessonButtonMemory = (Button)this.findViewById(R.id.lessonButtonMemory);
-        this.lessonButtonLecture.setOnClickListener(this);
-        this.lessonButtonExercise.setOnClickListener(this);
-        this.lessonButtonMemory.setOnClickListener(this);
     }
 
     @Override
@@ -67,7 +56,7 @@ public abstract class AbstractLessonActivity extends YouTubeFailureRecoveryActiv
 
             @Override
             public void performAction(View view) {
-                AbstractLessonActivity.this.onBackPressed();
+                VietEdWithYoutubeBaseActivity.this.onBackPressed();
             }
         });
     }
@@ -137,19 +126,6 @@ public abstract class AbstractLessonActivity extends YouTubeFailureRecoveryActiv
             ActivityUtils.showErrDialog(this, "Data format error.");
         } else {
             ActivityUtils.showErrDialog(this, exception.getMessage());
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view == this.lessonButtonLecture) {
-
-        } else if(view == this.lessonButtonExercise) {
-            Intent intent = new Intent(this, LessonExerciseActivity.class);
-            startActivity(intent);
-            return;
-        } else if(view == this.lessonButtonMemory) {
-
         }
     }
 }
