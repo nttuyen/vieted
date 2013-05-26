@@ -16,7 +16,7 @@ import com.vieted.android.app.utils.DeveloperKey;
  * Time: 11:47 AM
  * To change this template use File | Settings | File Templates.
  */
-public class LessonLectureActivity extends AbstractLessonActivity {
+public class LessonLectureActivity extends VietEdWithYoutubeBaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
