@@ -77,9 +77,9 @@ public class LessonExerciseActivity extends VietEdWithYoutubeBaseActivity implem
         this.players.add((Mp3Player)this.findViewById(R.id.mp3Player2));
         this.players.add((Mp3Player)this.findViewById(R.id.mp3Player3));
 
-        this.players.get(0).setDataSource("http://stream.org.mp3.zdn.vn/fsfsdfdsfdserwrwq3/f22234ddccfa54ad43b9fa5838e990c1/51a08c53/0/00/0009f615a07cc86154fc8dc0e64e387e.mp3");
-        this.players.get(1).setDataSource("http://stream2.org.mp3.zdn.vn/fsfsdfdsfdserwrwq3/c0d2fdcabcd56c8744c96ad921c66d79/519f54c5/2013/05/15/2/5/25e96c111d36dbefea68a786876708d7.mp3");
-        this.players.get(2).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/a0d20c02ff47d498457951e22c1d9f01/519f731f/2013/05/15/a/4/a47fb0d027a756c57467c242de0a4449.mp3");
+        this.players.get(0).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/2851c25e3fc3580832c9f4e093adb02e/51a1ff2e/2011/02/24/c/8/c82d76b404d59544a5c41858d87417cc.mp3");
+        this.players.get(1).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/0973fb1b1bdd899fee14bd6b91794779/51a1ff64/2011/02/24/3/8/3866a8205b9ba076229c41a0f931ea6c.mp3");
+        this.players.get(2).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/2191a13cf42aad410cbe62ff5a4ba74f/51a1ff78/2010/12/22/4/a/4a11d9bbc5ad8e35019d3903b4280dfb.mp3");
 
         for(Mp3Player player : this.players) {
             player.setListener(this);

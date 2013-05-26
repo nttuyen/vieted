@@ -13,6 +13,7 @@ public class RegisterActivity extends VietEdBaseActivity{
 		super.onCreate(savedInstanceState);
 		this.setTextHeader("Register");
 		this.setLayoutBody(R.layout.activity_register_account);
+		this.setHomeBackAction();
 	}
 	
 	@Override
