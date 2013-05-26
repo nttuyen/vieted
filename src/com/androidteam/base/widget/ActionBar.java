@@ -51,7 +51,7 @@ public class ActionBar extends RelativeLayout implements OnClickListener {
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        mBarView = (RelativeLayout) mInflater.inflate(R.layout.actionbar, null);
+        mBarView = (RelativeLayout) mInflater.inflate(R.layout.widget_actionbar, null);
         addView(mBarView);
 
         mLogoView = (ImageView) mBarView.findViewById(R.id.actionbar_home_logo);
@@ -227,7 +227,7 @@ public class ActionBar extends RelativeLayout implements OnClickListener {
      * @return a view
      */
     private View inflateAction(Action action) {
-        View view = mInflater.inflate(R.layout.actionbar_item, mActionsView, false);
+        View view = mInflater.inflate(R.layout.widget_actionbar_item, mActionsView, false);
 
         ImageButton labelView =
             (ImageButton) view.findViewById(R.id.actionbar_item);

@@ -29,9 +29,8 @@ public class LessonLectureActivity extends VietEdWithYoutubeBaseActivity {
     }
 
     protected void initControl() {
-        //setContentView(R.layout.activity_body_lesson_lecture);
         this.setLayoutBody(R.layout.activity_body_lesson_lecture);
-        YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.lessonLectureYoutubeView);
         youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
     }
 
@@ -49,6 +48,6 @@ public class LessonLectureActivity extends VietEdWithYoutubeBaseActivity {
 
     @Override
     protected YouTubePlayer.Provider getYouTubePlayerProvider() {
-        return (YouTubePlayerView) findViewById(R.id.youtube_view);
+        return (YouTubePlayerView) this.findViewById(R.id.lessonLectureYoutubeView);
     }
 }
