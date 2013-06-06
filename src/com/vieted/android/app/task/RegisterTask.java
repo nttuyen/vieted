@@ -2,18 +2,11 @@ package com.vieted.android.app.task;
 
 import com.androidteam.base.task.RestAsyncTask;
 
-/**
- * Created with IntelliJ IDEA.
- * User: nttuyen
- * Date: 5/21/13
- * Time: 2:24 PM
- * To change this template use File | Settings | File Templates.
- */
-public class LoginTask extends RestAsyncTask {
-    public LoginTask(String username, String password) {
-        super();
-        this.url = "http://dev.vieted.com/user/login";
-        this.addParam("api", "/user/login");
+public class RegisterTask extends RestAsyncTask {
+	public RegisterTask(String pass,String mail, String name){
+		super();
+		this.url = "http://dev.vieted.com/user/register";
+        this.addParam("api", "user/register");
         this.addParam("_step", "account");
         this.addParam("_lname", "dev");
         this.addParam("_cl_token", "");
@@ -23,13 +16,17 @@ public class LoginTask extends RestAsyncTask {
         this.addParam("_cl_rest", "1");
         this.addParam("_cl_ajax", "1");
         this.addParam("opponent_type", "cl_no_search");
-        this.addParam("lname", username);
-        this.addParam("mail", "");
-        this.addParam("name", "");
-        this.addParam("pass", password);
+        this.addParam("lname","dev");
+        this.addParam("mail",mail);
+        this.addParam("name", name);
+        this.addParam("pass", pass);
         this.addParam("login", "facebook");
         this.addParam("avatar", "");
         this.addParam("category", "vocabulary");
         this.addParam("_cl_submit", "Submit");
-    }
+
+		
+		
+	}
+
 }

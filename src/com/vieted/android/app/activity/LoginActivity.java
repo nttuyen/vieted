@@ -1,5 +1,7 @@
 package com.vieted.android.app.activity;
 
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -60,6 +62,8 @@ public class LoginActivity extends VietEdBaseActivity {
 				LoginActivity.this.loginTask
 						.setRestAsyncTaskListener(LoginActivity.this);
 				LoginActivity.this.loginTask.execute();
+				JSONObject temp = loginTask.getLastResult();
+				System.out.println(temp);
 			}
 		});
 	}
