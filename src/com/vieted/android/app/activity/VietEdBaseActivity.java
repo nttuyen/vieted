@@ -10,24 +10,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.androidteam.base.activity.BaseActivity;
 import com.androidteam.base.task.RestAsyncTask;
+import com.androidteam.base.utils.ActivityUtils;
 import com.androidteam.base.widget.ActionBar;
 import com.vieted.android.app.R;
 
 /**
- * Created with IntelliJ IDEA.
- * User: nttuyen
- * Date: 5/21/13
- * Time: 1:54 PM
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: nttuyen Date: 5/21/13 Time: 1:54 PM To
+ * change this template use File | Settings | File Templates.
  */
 public abstract class VietEdBaseActivity extends BaseActivity<RestAsyncTask> {
-    protected ActionBar actionBar;
-    protected LinearLayout bodyLayout;
+	protected ActionBar actionBar;
+	protected LinearLayout bodyLayout;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_global);
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_global);
 
         this.actionBar = (ActionBar)this.findViewById(R.id.actionbar);
         this.actionBar.setTitle("Home");
@@ -36,46 +34,48 @@ public abstract class VietEdBaseActivity extends BaseActivity<RestAsyncTask> {
         this.actionBar.addAction(new ActionBar.IntentAction(this, new Intent(this, HomeActivity.class), R.drawable.vieted_icon));
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-    }
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(android.R.anim.slide_in_left,
+				android.R.anim.slide_out_right);
+	}
 
-    protected void setHomeNothingAction() {
-        this.actionBar.setHomeAction(new ActionBar.Action() {
-            @Override
-            public int getDrawable() {
-                return R.drawable.vieted_icon;
-            }
+	protected void setHomeNothingAction() {
+		this.actionBar.setHomeAction(new ActionBar.Action() {
+			@Override
+			public int getDrawable() {
+				return R.drawable.vieted_icon;
+			}
 
-            @Override
-            public void performAction(View view) {
-                //TODO: nothing
-            }
-        });
-    }
-    protected void setHomeBackAction() {
-        this.actionBar.setHomeAction(new ActionBar.Action() {
-            @Override
-            public int getDrawable() {
-                return R.drawable.vieted_back_new;
-            }
+			@Override
+			public void performAction(View view) {
+				// TODO: nothing
+			}
+		});
+	}
 
-            @Override
-            public void performAction(View view) {
-                VietEdBaseActivity.this.onBackPressed();
-            }
-        });
-    }
+	protected void setHomeBackAction() {
+		this.actionBar.setHomeAction(new ActionBar.Action() {
+			@Override
+			public int getDrawable() {
+				return R.drawable.vieted_back_new;
+			}
 
-    protected void setTextHeader(String txtHeader) {
-        if (txtHeader != null)
-            this.actionBar.setTitle(txtHeader);
-    }
+			@Override
+			public void performAction(View view) {
+				VietEdBaseActivity.this.onBackPressed();
+			}
+		});
+	}
 
-    protected void setLayoutBody(int idBody) {
-        bodyLayout.removeAllViews();
-        bodyLayout.addView(getLayoutInflater().inflate(idBody, null));
-    }
+	protected void setTextHeader(String txtHeader) {
+		if (txtHeader != null)
+			this.actionBar.setTitle(txtHeader);
+	}
+
+	protected void setLayoutBody(int idBody) {
+		bodyLayout.removeAllViews();
+		bodyLayout.addView(getLayoutInflater().inflate(idBody, null));
+	}
 }
