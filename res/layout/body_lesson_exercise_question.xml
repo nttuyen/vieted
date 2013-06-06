@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <TextView android:id="@+id/questionText"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="Question text here"
+        />
+    <LinearLayout android:id="@+id/questionAnswerList"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@id/questionText"
+                  android:orientation="vertical"
+        />
+    <RelativeLayout android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+        <Button android:id="@+id/questionCheckandNextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Check and Next >>"/>
+        <Button android:id="@+id/questionCheckButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/questionCheckandNextButton"
+                android:text="Check"/>
+    </RelativeLayout>
+</RelativeLayout>

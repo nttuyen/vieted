@@ -19,11 +19,11 @@ import java.io.IOException;
  * Time: 11:35 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ContextHelper {
+public class UIContextHelper {
     private final Context context;
     private ProgressDialog progressDialog;
 
-    public ContextHelper(Context context) {
+    public UIContextHelper(Context context) {
         this.context = context;
         this.progressDialog = null;
     }
@@ -42,12 +42,18 @@ public class ContextHelper {
         progressDialog.show();
     }
 
-    /*public void showErrDialog(String title, String message) {
+    public void dismissLoading() {
+        if(this.progressDialog != null && this.progressDialog.isShowing()) {
+            this.progressDialog.dismiss();
+        }
+    }
+
+    public void showErrDialog(String title, String message) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.context);
         dialog.setMessage(message).setTitle(title)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
                 }).show();
-    }*/
+    }
 }

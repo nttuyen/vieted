@@ -77,7 +77,7 @@ public class LessonExerciseActivity extends VietEdWithYoutubeBaseActivity implem
         this.players.add((Mp3Player)this.findViewById(R.id.mp3Player2));
         this.players.add((Mp3Player)this.findViewById(R.id.mp3Player3));
 
-        this.players.get(0).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/2851c25e3fc3580832c9f4e093adb02e/51a1ff2e/2011/02/24/c/8/c82d76b404d59544a5c41858d87417cc.mp3");
+        this.players.get(0).setDataSource("http://stream2.s2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/d6ba852aefd52df6e4e009765698da63/51af5b14/2013/04/23/e/d/ed2e0aa4330be96bbb4fb2b57f722180.mp3", false);
         this.players.get(1).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/0973fb1b1bdd899fee14bd6b91794779/51a1ff64/2011/02/24/3/8/3866a8205b9ba076229c41a0f931ea6c.mp3");
         this.players.get(2).setDataSource("http://stream2.mp3.zdn.vn/fsfsdfdsfdserwrwq3/2191a13cf42aad410cbe62ff5a4ba74f/51a1ff78/2010/12/22/4/a/4a11d9bbc5ad8e35019d3903b4280dfb.mp3");
 

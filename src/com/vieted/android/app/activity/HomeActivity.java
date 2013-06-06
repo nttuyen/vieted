@@ -27,7 +27,7 @@ public class HomeActivity extends VietEdBaseActivity {
         this.actionBar.addAction(new ActionBar.Action() {
             @Override
             public int getDrawable() {
-                return R.drawable.button_home;
+                return R.drawable.vieted_icon;
             }
 
             @Override

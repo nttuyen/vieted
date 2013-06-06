@@ -1,14 +1,10 @@
 package com.vieted.android.app.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import com.androidteam.base.activity.BaseActivity;
+import com.androidteam.base.activity.BaseFragmentSupportActivity;
 import com.androidteam.base.task.RestAsyncTask;
 import com.androidteam.base.widget.ActionBar;
 import com.vieted.android.app.R;
@@ -16,11 +12,11 @@ import com.vieted.android.app.R;
 /**
  * Created with IntelliJ IDEA.
  * User: nttuyen
- * Date: 5/21/13
- * Time: 1:54 PM
+ * Date: 6/5/13
+ * Time: 10:59 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class VietEdBaseActivity extends BaseActivity<RestAsyncTask> {
+public abstract class VietEdBaseFragmentSupportActivity extends BaseFragmentSupportActivity<RestAsyncTask> {
     protected ActionBar actionBar;
     protected LinearLayout bodyLayout;
 
@@ -64,7 +60,7 @@ public abstract class VietEdBaseActivity extends BaseActivity<RestAsyncTask> {
 
             @Override
             public void performAction(View view) {
-                VietEdBaseActivity.this.onBackPressed();
+                VietEdBaseFragmentSupportActivity.this.onBackPressed();
             }
         });
     }

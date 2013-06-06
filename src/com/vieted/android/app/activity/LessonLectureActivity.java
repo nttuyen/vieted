@@ -42,7 +42,7 @@ public class LessonLectureActivity extends VietEdWithYoutubeBaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(LessonLectureActivity.this, LessonExerciseActivity.class);
+				Intent intent = new Intent(LessonLectureActivity.this, LessonExerciseFragmentSupportActivity.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
 			}

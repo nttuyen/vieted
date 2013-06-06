@@ -19,7 +19,7 @@ public class RegisterActivity extends VietEdBaseActivity{
 	@Override
 	protected void handleGetSuccess(RestAsyncTask task) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
