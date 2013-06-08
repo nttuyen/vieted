@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.androidteam.base.task.RestAsyncTask;
+import com.androidteam.base.utils.ActivityUtils;
 import com.vieted.android.app.R;
 import com.vieted.android.app.task.RegisterTask;
 import com.vieted.android.app.task.VoidTask;
@@ -19,6 +20,7 @@ public class RegisterActivity extends VietEdBaseActivity {
 	private RestAsyncTask regisTask;
 	private EditText txtUsername;
 	private EditText txtPassword;
+	private EditText txtPasswordRe;
 	private EditText txtEmail;
 	private Button bttSubmit;
 	private CheckBox checkPass;
@@ -35,6 +37,7 @@ public class RegisterActivity extends VietEdBaseActivity {
 		this.mainTask.execute();
 		this.txtEmail = (EditText) findViewById(R.id.txtRegisterEmail);
 		this.txtPassword = (EditText) findViewById(R.id.txtRegisterPass);
+		this.txtPasswordRe = (EditText) findViewById(R.id.txtRegisterPassRetype);
 		this.txtUsername = (EditText) findViewById(R.id.txtRegisterName);
 		this.bttSubmit = (Button) findViewById(R.id.bttRegisterSubmit);
 		checkPass = (CheckBox) findViewById(R.id.checkboxPassShowRegis);
@@ -61,10 +64,19 @@ public class RegisterActivity extends VietEdBaseActivity {
 				// TODO Auto-generated method stub
 				String username = txtUsername.getText().toString().trim();
 				String password = txtPassword.getText().toString().trim();
-				String email = txtEmail.getText().toString().trim();
-				RegisterActivity.this.regisTask = new RegisterTask(password,email,username);
-				RegisterActivity.this.regisTask.setRestAsyncTaskListener(RegisterActivity.this);
-				regisTask.execute();
+				String passwordRe = txtPasswordRe.getText().toString().trim();
+				if(!password.equals(passwordRe)){
+					ActivityUtils.showErrDialog(RegisterActivity.this, "Password and RetypePass are not match!");
+					
+				}
+				else {
+					String email = txtEmail.getText().toString().trim();
+					RegisterActivity.this.regisTask = new RegisterTask(password,email,username);
+					RegisterActivity.this.regisTask.setRestAsyncTaskListener(RegisterActivity.this);
+					regisTask.execute();
+					
+				}
+				
 				
 			}
 		});

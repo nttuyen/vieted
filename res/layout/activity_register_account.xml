@@ -46,6 +46,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:hint="Password" />
+            <EditText
+                android:id="@+id/txtRegisterPassRetype"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:hint="Password Retype" />
             <CheckBox 
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
