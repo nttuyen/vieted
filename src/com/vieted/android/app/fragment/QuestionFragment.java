@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.vieted.android.app.R;
 import com.vieted.android.app.adapter.QuestionPagerAdapter;
 import com.vieted.android.app.domain.Question;
+import com.vieted.android.app.utils.VietEdState;
 import com.vieted.android.app.widget.QuestionAnswerView;
 
 import java.util.ArrayList;
@@ -23,41 +24,51 @@ import java.util.List;
  * Time: 7:12 PM
  * To change this template use File | Settings | File Templates.
  */
-public class QuestionFragment extends Fragment implements View.OnClickListener{
-    private Button checkButton;
-    private Button checkAndNextButton;
+public class QuestionFragment extends Fragment {
     private View root;
 
-    private final QuestionPagerAdapter adapter;
-    private final int questionIndex;
-    private final Question question;
+    private int questionIndex;
+    private Question question;
     private List<QuestionAnswerView> answerViews;
 
+    public static String ARGUMENT_QUESTION_INDEX = "question_index";
+
     public static QuestionFragment newInstance(QuestionPagerAdapter adapter, int questionIndex) {
-        QuestionFragment fragment = new QuestionFragment(adapter, questionIndex);
+        QuestionFragment fragment = new QuestionFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARGUMENT_QUESTION_INDEX, questionIndex);
+        fragment.setArguments(args);
         return fragment;
     }
 
-    private QuestionFragment(QuestionPagerAdapter adapter, int questionIndex) {
-        this.adapter = adapter;
-        this.questionIndex = questionIndex;
-        this.question = this.adapter.getQuestionAt(this.questionIndex);
+    public QuestionFragment() {
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = this.getArguments();
+
+        this.questionIndex = args.getInt(ARGUMENT_QUESTION_INDEX);
+        this.question = VietEdState.getInstance().getCurrentQuiz().getQuestions().get(questionIndex);
         this.answerViews = new ArrayList<QuestionAnswerView>();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.body_lesson_exercise_question, container, false);
-        TextView messageTextView = (TextView)v.findViewById(R.id.questionText);
+        if(this.root != null) return this.root;
+
+        root = inflater.inflate(R.layout.body_lesson_exercise_question, container, false);
+        TextView messageTextView = (TextView) root.findViewById(R.id.questionText);
         messageTextView.setText(question.getQuestionText());
 
-        this.checkAndNextButton = (Button)v.findViewById(R.id.questionCheckandNextButton);
-        this.checkAndNextButton.setOnClickListener(this);
-        this.checkButton = (Button)v.findViewById(R.id.questionCheckButton);
-        this.checkButton.setOnClickListener(this);
-
-        LinearLayout answerLayout = (LinearLayout)v.findViewById(R.id.questionAnswerList);
+        LinearLayout answerLayout = (LinearLayout) root.findViewById(R.id.questionAnswerList);
         answerLayout.removeAllViews();
         for(String ans : question.getAnswers()) {
             QuestionAnswerView answer = new QuestionAnswerView(this.getActivity());
@@ -65,18 +76,6 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
             this.answerViews.add(answer);
             answerLayout.addView(answer);
         }
-        return v;
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(adapter.hasMoreQuestion()){
-            adapter.allowNext();
-        }
-    }
-
-    private void score() {
-        boolean[] result = question.getResults();
-
+        return root;
     }
 }

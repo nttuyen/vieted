@@ -3,9 +3,12 @@ package com.vieted.android.app.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 import com.vieted.android.app.domain.Question;
 import com.vieted.android.app.fragment.QuestionFragment;
+import com.vieted.android.app.utils.VietEdState;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,25 +19,34 @@ import java.util.List;
  * Time: 7:02 PM
  * To change this template use File | Settings | File Templates.
  */
-public class QuestionPagerAdapter extends FragmentPagerAdapter {
+public class QuestionPagerAdapter extends FragmentPagerAdapter implements Serializable {
     private final List<Question> questions;
     private int currentMaxPage;
-    private final List<Fragment> fragments;
+    private final Fragment[] fragments;
 
-    public QuestionPagerAdapter(FragmentManager fm, List<Question> questions) {
+    public QuestionPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.questions = questions;
-        this.fragments = new ArrayList<Fragment>();
+        this.questions = VietEdState.getInstance().getCurrentQuiz().getQuestions();
+        int size = questions.size();
+        this.fragments = new Fragment[size];
         this.currentMaxPage = 1;
     }
 
     @Override
     public Fragment getItem(int position) {
-        if(fragments.size() <= position) {
-            QuestionFragment fragment = QuestionFragment.newInstance(this, position);
-            fragments.add(position, fragment);
+        if(fragments.length <= position) {
+            //TODO: how to do it??
         }
-        return fragments.get(position);
+        if(fragments[position] == null) {
+            QuestionFragment fragment = QuestionFragment.newInstance(this, position);
+            fragments[position] = fragment;
+        }
+        return fragments[position];
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+
     }
 
     @Override

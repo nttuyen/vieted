@@ -17,14 +17,13 @@
 package com.vieted.android.app.activity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.util.Log;
 import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.vieted.android.app.R;
-import com.vieted.android.app.utils.DeveloperKey;
+import com.vieted.android.app.utils.Const;
 
 /**
  * An abstract activity which deals with recovering from errors which may occur during API
@@ -56,7 +55,7 @@ public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == RECOVERY_DIALOG_REQUEST) {
-      getYouTubePlayerProvider().initialize(DeveloperKey.DEVELOPER_KEY, this);
+      getYouTubePlayerProvider().initialize(Const.GOOGLE_API_ANDROID_DEVELOPER_KEY, this);
     }
   }
 

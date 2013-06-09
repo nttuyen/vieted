@@ -11,7 +11,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.vieted.android.app.R;
 import com.vieted.android.app.task.VoidTask;
-import com.vieted.android.app.utils.DeveloperKey;
+import com.vieted.android.app.utils.Const;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,7 +35,7 @@ public class LessonLectureActivity extends VietEdWithYoutubeBaseActivity {
     protected void initControl() {
         this.setLayoutBody(R.layout.activity_body_lesson_lecture);
         YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.lessonLectureYoutubeView);
-        youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
+        youTubeView.initialize(Const.GOOGLE_API_ANDROID_DEVELOPER_KEY, this);
         
         Button button = (Button)this.findViewById(R.id.lessonButtonExercise);
         button.setOnClickListener(new OnClickListener() {

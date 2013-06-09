@@ -1,17 +1,10 @@
 package com.vieted.android.app.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.androidteam.base.task.RestAsyncTask;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -19,11 +12,12 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.vieted.android.app.R;
 import com.vieted.android.app.adapter.QuestionPagerAdapter;
 import com.vieted.android.app.domain.Question;
+import com.vieted.android.app.domain.Quiz;
 import com.vieted.android.app.task.VoidTask;
-import com.vieted.android.app.utils.DeveloperKey;
-import com.vieted.android.app.widget.QuestionAnswerView;
+import com.vieted.android.app.utils.Const;
+import com.vieted.android.app.utils.VietEdState;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,29 +28,47 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSupportActivity {
+    private Quiz quiz;
     private ViewPager questionPager;
     private YouTubePlayer player = null;
     private YouTubePlayerSupportFragment youtubeFragment;
-    private List<Fragment> questionFragments;
+    private QuestionPagerAdapter adapter;
+
+    private Button checkButton;
+    private Button checkAndNextButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mainTask = new VoidTask();
-        this.mainTask.setRestAsyncTaskListener(this);
-        this.mainTask.execute();
+
+        if(savedInstanceState == null) {
+            this.mainTask = new VoidTask();
+            this.mainTask.setRestAsyncTaskListener(this);
+            this.mainTask.execute();
+        } else {
+            this.initBodyView();
+            this.initQuizYoutubeVideo();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     public void initBodyView() {
         this.setLayoutBody(R.layout.body_lesson_exercise);
 
+        //Init youtbeFragment :)
         this.youtubeFragment = (YouTubePlayerSupportFragment)this.getSupportFragmentManager().findFragmentById(R.id.youtubePlayerFragment);
-        this.youtubeFragment.initialize(DeveloperKey.DEVELOPER_KEY, new YouTubePlayer.OnInitializedListener() {
+        this.youtubeFragment.setRetainInstance(true);
+        this.youtubeFragment.initialize(Const.GOOGLE_API_ANDROID_DEVELOPER_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 LessonExerciseFragmentSupportActivity.this.player = youTubePlayer;
+                VietEdState.getInstance().setCurrentYoutubePlayer(youTubePlayer);
                 if(!b) {
-                    LessonExerciseFragmentSupportActivity.this.player.cueVideo("O52TbIbCEKo");
+                    initQuizYoutubeVideo();
                 }
             }
 
@@ -67,7 +79,15 @@ public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSup
         fragmentTransaction.hide(this.youtubeFragment);
         fragmentTransaction.commit();
 
-        this.questionPager = (ViewPager)this.findViewById(R.id.viewpager);
+        //Process question pager
+        this.questionPager = (ViewPager)this.findViewById(R.id.questionViewPager);
+
+        //TODO: reload quiz here :)
+        this.quiz = new Quiz();
+        VietEdState.getInstance().setCurrentQuiz(this.quiz);
+        quiz.setId(100);
+        quiz.setDescription("Listen video and choice the best answer in question.");
+        quiz.setVideo("wKJ9KzGQq0w");
 
         List<Question> questions = new ArrayList<Question>();
         Question question = new Question();
@@ -88,36 +108,45 @@ public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSup
         question.setScores(new float[]{1, 0, 0, 0});
         questions.add(question);
 
-        this.questionPager.setAdapter(new QuestionPagerAdapter(this.getSupportFragmentManager(), questions));
-        this.questionPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i2) {
+        quiz.setQuestions(questions);
 
-            }
+        //Process button
+        this.checkButton = (Button)this.findViewById(R.id.questionCheckButton);
+        this.checkAndNextButton = (Button)this.findViewById(R.id.questionCheckandNextButton);
+        this.checkButton.setOnClickListener(onClickListener);
+        this.checkAndNextButton.setOnClickListener(onClickListener);
 
-            @Override
-            public void onPageSelected(int i) {
-                FragmentTransaction fragmentTransaction = LessonExerciseFragmentSupportActivity.this.getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.show(LessonExerciseFragmentSupportActivity.this.youtubeFragment);
-                if(2 == i) {
-                    LessonExerciseFragmentSupportActivity.this.player.cueVideo("wKJ9KzGQq0w");
-                } else if(1 == i) {
-                    LessonExerciseFragmentSupportActivity.this.player.cueVideo("O52TbIbCEKo");
-                } else {
-                    fragmentTransaction.hide(LessonExerciseFragmentSupportActivity.this.youtubeFragment);
-                }
-                fragmentTransaction.commit();
-            }
+        this.adapter = new QuestionPagerAdapter(this.getSupportFragmentManager());
+        this.questionPager.setAdapter(this.adapter);
+    }
 
-            @Override
-            public void onPageScrollStateChanged(int i) {
+    private void initQuizYoutubeVideo() {
+        if(this.player == null) {
+            return;
+        }
 
-            }
-        });
+        //Process quiz Video
+        FragmentTransaction fragmentTransaction = LessonExerciseFragmentSupportActivity.this.getSupportFragmentManager().beginTransaction();
+        if(quiz.getVideo() != null && !quiz.getVideo().isEmpty()) {
+            this.player.cueVideo(quiz.getVideo());
+            fragmentTransaction.show(LessonExerciseFragmentSupportActivity.this.youtubeFragment);
+        } else {
+            fragmentTransaction.hide(LessonExerciseFragmentSupportActivity.this.youtubeFragment);
+        }
+        fragmentTransaction.commit();
     }
 
     @Override
     protected void handleGetSuccess(RestAsyncTask task) {
         this.initBodyView();
     }
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(adapter.hasMoreQuestion()) {
+                adapter.allowNext();
+            }
+        }
+    };
 }
