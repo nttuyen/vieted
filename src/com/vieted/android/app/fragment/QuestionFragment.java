@@ -2,13 +2,13 @@ package com.vieted.android.app.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import com.vieted.android.app.R;
+import com.vieted.android.app.adapter.QuestionAnswerListAdapter;
 import com.vieted.android.app.adapter.QuestionPagerAdapter;
 import com.vieted.android.app.domain.Question;
 import com.vieted.android.app.utils.VietEdState;
@@ -47,6 +47,7 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.clear();
     }
 
     @Override
@@ -68,14 +69,44 @@ public class QuestionFragment extends Fragment {
         TextView messageTextView = (TextView) root.findViewById(R.id.questionText);
         messageTextView.setText(question.getQuestionText());
 
-        LinearLayout answerLayout = (LinearLayout) root.findViewById(R.id.questionAnswerList);
-        answerLayout.removeAllViews();
-        for(String ans : question.getAnswers()) {
-            QuestionAnswerView answer = new QuestionAnswerView(this.getActivity());
-            answer.setAnswerText(ans);
-            this.answerViews.add(answer);
-            answerLayout.addView(answer);
-        }
+        final ListView listView = (ListView)root.findViewById(R.id.listViewQuestionAnswer);
+        listView.setAdapter(new QuestionAnswerListAdapter(this.getActivity(), this.question.getAnswers()));
+        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                long[] checked = listView.getCheckedItemIds();
+                String s = "AAAA: ";
+                for(long z : checked) {
+                    s += ", " + z;
+                }
+                Log.e("LISTTTT", s);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                long[] checked = listView.getCheckedItemIds();
+                String s = "AAA: ";
+                for(long z : checked) {
+                    s += ", " + z;
+                }
+                Log.e("LISTTTT", s);
+            }
+        });
+
+//        LinearLayout answerLayout = (LinearLayout) root.findViewById(R.id.questionAnswerList);
+//        answerLayout.removeAllViews();
+//        for(String ans : question.getAnswers()) {
+//            QuestionAnswerView answer = new QuestionAnswerView(this.getActivity());
+//            answer.setAnswerText(ans + " sssss");
+//            this.answerViews.add(answer);
+//            answerLayout.addView(answer);
+//        }
         return root;
     }
 }

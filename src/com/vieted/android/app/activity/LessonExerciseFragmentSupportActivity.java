@@ -88,6 +88,7 @@ public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSup
         quiz.setId(100);
         quiz.setDescription("Listen video and choice the best answer in question.");
         quiz.setVideo("wKJ9KzGQq0w");
+        //quiz.setVideo(null);
 
         List<Question> questions = new ArrayList<Question>();
         Question question = new Question();
@@ -97,9 +98,9 @@ public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSup
         questions.add(question);
 
         question = new Question();
-        question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4"});
+        question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"});
         question.setQuestionText("Choice the best answer 111");
-        question.setScores(new float[]{0, 1, 0, 0});
+        question.setScores(new float[]{0, 1, 0, 0, 0});
         questions.add(question);
 
         question = new Question();

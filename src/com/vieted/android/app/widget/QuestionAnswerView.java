@@ -1,7 +1,9 @@
 package com.vieted.android.app.widget;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -47,7 +49,7 @@ public class QuestionAnswerView extends LinearLayout {
         this.answerIconSuccess = (ImageView)rootView.findViewById(R.id.answerIconSuccess);
         this.answerTextView = (TextView)rootView.findViewById(R.id.answerTextView);
 
-        this.answerResult.setVisibility(View.GONE);
+        //this.answerResult.setVisibility(View.GONE);
         this.checked = this.answerCheckbox.isChecked();
         this.answerCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -59,9 +61,12 @@ public class QuestionAnswerView extends LinearLayout {
             @Override
             public void onClick(View view) {
                 QuestionAnswerView.this.checked = answerCheckbox.isChecked();
+                Log.e("QUESTION", view.toString());
+                Log.e("QUESTION", String.valueOf(((CheckBox) view).getText()));
             }
         });
 
+        this.removeAllViews();
         this.addView(rootView);
     }
 

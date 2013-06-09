@@ -54,10 +54,6 @@ public class QuestionPagerAdapter extends FragmentPagerAdapter implements Serial
         return this.currentMaxPage;
     }
 
-    public Question getQuestionAt(int index) {
-        return this.questions.get(index);
-    }
-
     public boolean hasMoreQuestion() {
         return this.currentMaxPage < this.questions.size();
     }
