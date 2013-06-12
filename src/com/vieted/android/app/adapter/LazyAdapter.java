@@ -51,13 +51,11 @@ public class LazyAdapter extends BaseAdapter {
         if(convertView==null)
             vi = inflater.inflate(R.layout.my_course_list_row, null);
 
-        TextView number = (TextView)vi.findViewById(R.id.listRowNumberText);
         TextView name = (TextView)vi.findViewById(R.id.listRowName);
         TextView percentCompleted = (TextView)vi.findViewById(R.id.listRowPercentComplete);
         TextView score =(TextView)vi.findViewById(R.id.listRowScore); // thumb image
 
         Map<String, String> course = this.data.get(position);
-        number.setText("" + position);
         name.setText(course.get("NAME"));
         percentCompleted.setText(course.get("PERCENT_COMPLETED"));
         score.setText(course.get("SCORE"));

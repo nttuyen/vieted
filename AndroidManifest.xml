@@ -36,5 +36,6 @@
         <activity android:name=".activity.LessonMemoryActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.LessonExerciseFragmentSupportActivity"/>
+        <activity android:name=".activity.ProfileActivity"></activity>
     </application>
 </manifest> 

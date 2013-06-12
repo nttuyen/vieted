@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/base_btt"
+                    android:background="@drawable/button_black_3d"
                     android:text="Login"
                     android:textColor="@drawable/btn_default" />
 
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/base_btt"
+                    android:background="@drawable/button_black_3d"
                     android:text="Register"
                     android:textColor="@drawable/btn_default" />
             </LinearLayout>

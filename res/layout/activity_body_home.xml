@@ -15,7 +15,7 @@
             android:id="@+id/buttonMyCourse"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/base_btt"
+            android:background="@drawable/button_black_3d"
             android:text="My Course"
             android:textColor="@drawable/btn_default" />
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/base_btt"
+            android:background="@drawable/button_black_3d"
             android:text="List Course"
             android:textColor="@drawable/btn_default" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/base_btt"
+            android:background="@drawable/button_black_3d"
             android:text="Profile"
             android:textColor="@drawable/btn_default" />
 
@@ -43,7 +43,7 @@
             android:id="@+id/buttonPayment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/base_btt"
+            android:background="@drawable/button_black_3d"
             android:text="Payment"
             android:textColor="@drawable/btn_default" />
     </LinearLayout>
