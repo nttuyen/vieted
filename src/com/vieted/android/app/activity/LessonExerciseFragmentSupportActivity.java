@@ -1,5 +1,6 @@
 package com.vieted.android.app.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -34,9 +35,6 @@ public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSup
     private YouTubePlayerSupportFragment youtubeFragment;
     private QuestionPagerAdapter adapter;
 
-    private Button checkButton;
-    private Button checkAndNextButton;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +52,20 @@ public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSup
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        if(this.player != null) {
+            if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                this.player.setFullscreen(true);
+                player.setShowFullscreenButton(false);
+            } else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                this.player.setFullscreen(false);
+                player.setShowFullscreenButton(true);
+            }
+        }
+        super.onConfigurationChanged(newConfig);
     }
 
     public void initBodyView() {
