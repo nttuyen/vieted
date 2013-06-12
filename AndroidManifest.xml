@@ -48,5 +48,6 @@
         <activity android:name=".activity.LessonExerciseFragmentSupportActivity"
                   android:configChanges="orientation"
             />
+        <activity android:name=".activity.ProfileActivity"></activity>
     </application>
 </manifest> 
