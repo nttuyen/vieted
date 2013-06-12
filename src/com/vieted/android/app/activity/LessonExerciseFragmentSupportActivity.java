@@ -83,38 +83,37 @@ public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSup
         this.questionPager = (ViewPager)this.findViewById(R.id.questionViewPager);
 
         //TODO: reload quiz here :)
-        this.quiz = new Quiz();
-        VietEdState.getInstance().setCurrentQuiz(this.quiz);
-        quiz.setId(100);
-        quiz.setDescription("Listen video and choice the best answer in question.");
-        quiz.setVideo("wKJ9KzGQq0w");
+        if(VietEdState.getInstance().getCurrentQuiz() == null) {
+            this.quiz = new Quiz();
+            VietEdState.getInstance().setCurrentQuiz(this.quiz);
+            quiz.setId(100);
+            quiz.setDescription("Listen video and choice the best answer in question.");
+            quiz.setVideo("wKJ9KzGQq0w");
+            //quiz.setVideo(null);
 
-        List<Question> questions = new ArrayList<Question>();
-        Question question = new Question();
-        question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4"});
-        question.setQuestionText("Choice the best answer");
-        question.setScores(new float[]{0, 0, 0, 1});
-        questions.add(question);
+            List<Question> questions = new ArrayList<Question>();
+            Question question = new Question();
+            question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4"});
+            question.setQuestionText("Choice the best answer");
+            question.setScores(new float[]{0, 0, 0, 1});
+            questions.add(question);
 
-        question = new Question();
-        question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4"});
-        question.setQuestionText("Choice the best answer 111");
-        question.setScores(new float[]{0, 1, 0, 0});
-        questions.add(question);
+            question = new Question();
+            question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"});
+            question.setQuestionText("Choice the best answer 111");
+            question.setScores(new float[]{0, 1, 0, 0, 1});
+            questions.add(question);
 
-        question = new Question();
-        question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4"});
-        question.setQuestionText("Choice the best answer 3");
-        question.setScores(new float[]{1, 0, 0, 0});
-        questions.add(question);
+            question = new Question();
+            question.setAnswers(new String[]{"Answer 1", "Answer 2", "Answer 3", "Answer 4"});
+            question.setQuestionText("Choice the best answer 3");
+            question.setScores(new float[]{1, 0, 0, 0});
+            questions.add(question);
 
-        quiz.setQuestions(questions);
-
-        //Process button
-        this.checkButton = (Button)this.findViewById(R.id.questionCheckButton);
-        this.checkAndNextButton = (Button)this.findViewById(R.id.questionCheckandNextButton);
-        this.checkButton.setOnClickListener(onClickListener);
-        this.checkAndNextButton.setOnClickListener(onClickListener);
+            quiz.setQuestions(questions);
+        } else {
+            this.quiz = VietEdState.getInstance().getCurrentQuiz();
+        }
 
         this.adapter = new QuestionPagerAdapter(this.getSupportFragmentManager());
         this.questionPager.setAdapter(this.adapter);

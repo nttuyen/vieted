@@ -2,13 +2,13 @@ package com.vieted.android.app.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import com.vieted.android.app.R;
+import com.vieted.android.app.adapter.QuestionAnswerListAdapter;
 import com.vieted.android.app.adapter.QuestionPagerAdapter;
 import com.vieted.android.app.domain.Question;
 import com.vieted.android.app.utils.VietEdState;
@@ -30,10 +30,11 @@ public class QuestionFragment extends Fragment {
     private int questionIndex;
     private Question question;
     private List<QuestionAnswerView> answerViews;
+    private OnQuestionCompletedListener listener;
 
     public static String ARGUMENT_QUESTION_INDEX = "question_index";
 
-    public static QuestionFragment newInstance(QuestionPagerAdapter adapter, int questionIndex) {
+    public static QuestionFragment newInstance(int questionIndex) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
         args.putInt(ARGUMENT_QUESTION_INDEX, questionIndex);
@@ -47,6 +48,7 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.clear();
     }
 
     @Override
@@ -68,14 +70,25 @@ public class QuestionFragment extends Fragment {
         TextView messageTextView = (TextView) root.findViewById(R.id.questionText);
         messageTextView.setText(question.getQuestionText());
 
-        LinearLayout answerLayout = (LinearLayout) root.findViewById(R.id.questionAnswerList);
-        answerLayout.removeAllViews();
-        for(String ans : question.getAnswers()) {
-            QuestionAnswerView answer = new QuestionAnswerView(this.getActivity());
-            answer.setAnswerText(ans);
-            this.answerViews.add(answer);
-            answerLayout.addView(answer);
-        }
+        final ListView listView = (ListView)root.findViewById(R.id.listViewQuestionAnswer);
+        QuestionAnswerListAdapter adapter = new QuestionAnswerListAdapter(this.getActivity(), this.questionIndex);
+        listView.setAdapter(adapter);
+        adapter.setOnAnswerCompletedListener(new QuestionAnswerListAdapter.OnAnswerCompletedListener() {
+            @Override
+            public void onAnswerCompleted(int questionIndex) {
+                if(listener != null) {
+                    listener.onQuestionCompletedListener(question);
+                }
+            }
+        });
+
         return root;
+    }
+
+    public void setOnQuestionCompletedListener(OnQuestionCompletedListener listener) {
+        this.listener = listener;
+    }
+    public interface OnQuestionCompletedListener {
+        public void onQuestionCompletedListener(Question question);
     }
 }

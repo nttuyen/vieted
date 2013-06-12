@@ -38,9 +38,17 @@ public class QuestionPagerAdapter extends FragmentPagerAdapter implements Serial
             //TODO: how to do it??
         }
         if(fragments[position] == null) {
-            QuestionFragment fragment = QuestionFragment.newInstance(this, position);
+            QuestionFragment fragment = QuestionFragment.newInstance(position);
             fragments[position] = fragment;
         }
+        ((QuestionFragment)fragments[position]).setOnQuestionCompletedListener(new QuestionFragment.OnQuestionCompletedListener() {
+            @Override
+            public void onQuestionCompletedListener(Question question) {
+                if(hasMoreQuestion()) {
+                    allowNext();
+                }
+            }
+        });
         return fragments[position];
     }
 
@@ -51,11 +59,17 @@ public class QuestionPagerAdapter extends FragmentPagerAdapter implements Serial
 
     @Override
     public int getCount() {
+        //return this.currentMaxPage;
+        this.currentMaxPage = 1;
+        for(Question q : this.questions) {
+            if(q.isCompleted()) {
+                this.currentMaxPage ++;
+            }
+        }
+        if(this.currentMaxPage > this.questions.size()) {
+            this.currentMaxPage = this.questions.size();
+        }
         return this.currentMaxPage;
-    }
-
-    public Question getQuestionAt(int index) {
-        return this.questions.get(index);
     }
 
     public boolean hasMoreQuestion() {
@@ -63,7 +77,7 @@ public class QuestionPagerAdapter extends FragmentPagerAdapter implements Serial
     }
 
     public void allowNext() {
-        this.currentMaxPage++;
+        //this.currentMaxPage++;
         this.notifyDataSetChanged();
     }
 }

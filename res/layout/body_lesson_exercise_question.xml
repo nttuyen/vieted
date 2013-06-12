@@ -10,10 +10,20 @@
               android:layout_height="wrap_content"
               android:text="Question text here"
         />
-    <LinearLayout android:id="@+id/questionAnswerList"
+    <ListView
+        android:id="@+id/listViewQuestionAnswer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/questionText"
+        android:choiceMode="multipleChoice"
+        android:listSelector="@color/transparent"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/transparent"
+        />
+    <!--<LinearLayout android:id="@+id/questionAnswerList"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:layout_below="@id/questionText"
                   android:orientation="vertical"
-        />
+        />-->
 </RelativeLayout>
