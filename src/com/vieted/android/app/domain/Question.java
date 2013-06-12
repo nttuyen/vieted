@@ -17,8 +17,9 @@ public class Question implements Serializable {
     private String audio;
     private String video;
     private String[] answers;
-    private boolean[] results;
     private float[] scores;
+    private boolean[] results;
+    private boolean completed;
 
     public Question() {
         this.questionText = "";
@@ -59,6 +60,10 @@ public class Question implements Serializable {
 
     public void setAnswers(String[] answers) {
         this.answers = answers;
+        this.results = new boolean[answers.length];
+        for(int i = 0; i < answers.length; i++) {
+            results[i] = false;
+        }
     }
 
     public boolean[] getResults() {
@@ -75,5 +80,13 @@ public class Question implements Serializable {
 
     public void setScores(float[] scores) {
         this.scores = scores;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

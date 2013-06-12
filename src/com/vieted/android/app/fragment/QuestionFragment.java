@@ -30,10 +30,11 @@ public class QuestionFragment extends Fragment {
     private int questionIndex;
     private Question question;
     private List<QuestionAnswerView> answerViews;
+    private OnQuestionCompletedListener listener;
 
     public static String ARGUMENT_QUESTION_INDEX = "question_index";
 
-    public static QuestionFragment newInstance(QuestionPagerAdapter adapter, int questionIndex) {
+    public static QuestionFragment newInstance(int questionIndex) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
         args.putInt(ARGUMENT_QUESTION_INDEX, questionIndex);
@@ -70,43 +71,24 @@ public class QuestionFragment extends Fragment {
         messageTextView.setText(question.getQuestionText());
 
         final ListView listView = (ListView)root.findViewById(R.id.listViewQuestionAnswer);
-        listView.setAdapter(new QuestionAnswerListAdapter(this.getActivity(), this.question.getAnswers()));
-        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        QuestionAnswerListAdapter adapter = new QuestionAnswerListAdapter(this.getActivity(), this.questionIndex);
+        listView.setAdapter(adapter);
+        adapter.setOnAnswerCompletedListener(new QuestionAnswerListAdapter.OnAnswerCompletedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                long[] checked = listView.getCheckedItemIds();
-                String s = "AAAA: ";
-                for(long z : checked) {
-                    s += ", " + z;
+            public void onAnswerCompleted(int questionIndex) {
+                if(listener != null) {
+                    listener.onQuestionCompletedListener(question);
                 }
-                Log.e("LISTTTT", s);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                long[] checked = listView.getCheckedItemIds();
-                String s = "AAA: ";
-                for(long z : checked) {
-                    s += ", " + z;
-                }
-                Log.e("LISTTTT", s);
             }
         });
 
-//        LinearLayout answerLayout = (LinearLayout) root.findViewById(R.id.questionAnswerList);
-//        answerLayout.removeAllViews();
-//        for(String ans : question.getAnswers()) {
-//            QuestionAnswerView answer = new QuestionAnswerView(this.getActivity());
-//            answer.setAnswerText(ans + " sssss");
-//            this.answerViews.add(answer);
-//            answerLayout.addView(answer);
-//        }
         return root;
+    }
+
+    public void setOnQuestionCompletedListener(OnQuestionCompletedListener listener) {
+        this.listener = listener;
+    }
+    public interface OnQuestionCompletedListener {
+        public void onQuestionCompletedListener(Question question);
     }
 }
