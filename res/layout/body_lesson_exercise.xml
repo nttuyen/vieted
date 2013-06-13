@@ -1,53 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@+id/lessonExerciseRootView"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical"
             >
-
-    <TextView android:id="@+id/exerciseDescription"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_alignParentTop="true"
-              android:text="Exercise text here"/>
-
-    <!--<FrameLayout android:id="@+id/youtubePlayerFragmentContainer"-->
-                 <!--android:layout_width="fill_parent"-->
-                 <!--android:layout_height="wrap_content"-->
-                 <!--android:layout_below="@id/exerciseDescription"-->
-        <!--/>-->
-
     <fragment android:id="@+id/youtubePlayerFragment"
               android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
-              android:layout_below="@id/exerciseDescription"
+              android:layout_alignParentTop="true"
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:layout_weight="1"/>
 
-    <com.androidteam.base.widget.Mp3Player
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mp3Player"
-        android:layout_below="@id/youtubePlayerFragment"/>
+    <LinearLayout android:id="@+id/exerciseLinearLayout"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:layout_weight="1"
+                  android:layout_below="@id/youtubePlayerFragment"
+                  android:orientation="vertical"
+        >
+        <TextView android:id="@+id/exerciseDescription"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="Exercise text here"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/questionViewPager"
-        android:layout_below="@+id/mp3Player"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        <com.androidteam.base.widget.Mp3Player
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mp3Player"
+            android:layout_below="@id/youtubePlayerFragment"/>
 
-    <!--<RelativeLayout android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true">
-        <Button android:id="@+id/questionCheckandNextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Check and Next >>"/>
-        <Button android:id="@+id/questionCheckButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/questionCheckandNextButton"
-                android:text="Check"/>
-    </RelativeLayout>-->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/questionViewPager"
+            android:layout_below="@+id/mp3Player"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
 </RelativeLayout>

@@ -2,20 +2,14 @@ package com.vieted.android.app.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.vieted.android.app.R;
 import com.vieted.android.app.adapter.QuestionAnswerListAdapter;
-import com.vieted.android.app.adapter.QuestionPagerAdapter;
 import com.vieted.android.app.domain.Question;
 import com.vieted.android.app.utils.VietEdState;
-import com.vieted.android.app.widget.QuestionAnswerView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,7 +23,6 @@ public class QuestionFragment extends Fragment {
 
     private int questionIndex;
     private Question question;
-    private List<QuestionAnswerView> answerViews;
     private OnQuestionCompletedListener listener;
 
     public static String ARGUMENT_QUESTION_INDEX = "question_index";
@@ -58,7 +51,6 @@ public class QuestionFragment extends Fragment {
 
         this.questionIndex = args.getInt(ARGUMENT_QUESTION_INDEX);
         this.question = VietEdState.getInstance().getCurrentQuiz().getQuestions().get(questionIndex);
-        this.answerViews = new ArrayList<QuestionAnswerView>();
     }
 
     @Override
