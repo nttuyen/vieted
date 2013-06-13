@@ -47,7 +47,7 @@ public class HomeActivity extends VietEdBaseActivity {
         myCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, CourseListActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MyCourseActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

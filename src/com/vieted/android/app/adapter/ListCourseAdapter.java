@@ -2,6 +2,7 @@ package com.vieted.android.app.adapter;
 
 import java.util.ArrayList;
 
+import com.vieted.android.app.R;
 import com.vieted.android.app.domain.Course;
 
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 public class ListCourseAdapter extends BaseAdapter{
 	
@@ -21,7 +23,7 @@ public class ListCourseAdapter extends BaseAdapter{
 			Context context) {
 		super();
 		this.mListCourses = mListCourses;
-		this.mLayoutInflater = mLayoutInflater;
+		mLayoutInflater = LayoutInflater.from(context); 
 	}
 
 	@Override
@@ -45,7 +47,17 @@ public class ListCourseAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		return null;
+		View vi = convertView;
+		if (convertView== null) 
+			vi= mLayoutInflater.inflate(R.layout.item_list_course,null);
+		TextView name = (TextView) vi.findViewById(R.id.listCoureName);
+		TextView teacher = (TextView) vi.findViewById(R.id.listCourseTeacher);
+		TextView level = (TextView) vi.findViewById(R.id.listCourseLevel);
+		
+		name.setText(mListCourses.get(position).getName());
+		teacher.setText(mListCourses.get(position).getTeacher());
+		level.setText(mListCourses.get(position).getLevel());
+		return convertView;
 	}
 
 }
