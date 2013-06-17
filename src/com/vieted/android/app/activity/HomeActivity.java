@@ -52,8 +52,8 @@ public class HomeActivity extends VietEdBaseActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-        Button listCourse = (Button) findViewById(R.id.buttonProfile);
-        listCourse.setOnClickListener(new View.OnClickListener() {
+        Button profileButton = (Button) findViewById(R.id.buttonProfile);
+        profileButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -61,6 +61,18 @@ public class HomeActivity extends VietEdBaseActivity {
 				Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			}
+		});
+        Button listCourseButton = (Button) findViewById(R.id.buttonListCourse);
+        listCourseButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(HomeActivity.this, ListCourseActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);	
+			
 			}
 		});
     }
