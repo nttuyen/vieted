@@ -3,6 +3,7 @@ package com.vieted.android.app.adapter;
 import java.util.ArrayList;
 
 import com.vieted.android.app.R;
+import com.vieted.android.app.domain.BaseObject;
 import com.vieted.android.app.domain.Unit;
 
 import android.content.Context;
@@ -14,27 +15,27 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class RatingAdapter extends BaseAdapter{
-	ArrayList<Unit> unitList;
+	ArrayList<BaseObject> objList;
 	private LayoutInflater mLayoutInflater;
 
 	
-	public RatingAdapter(ArrayList<Unit> unitList,
+	public RatingAdapter(ArrayList<BaseObject> objList,
 			Context context) {
 		super();
-		this.unitList = unitList;
+		this.objList = objList;
 		mLayoutInflater = LayoutInflater.from(context);
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return unitList.size();
+		return objList.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return unitList.get(arg0);
+		return objList.get(arg0);
 	}
 
 	@Override
@@ -53,11 +54,10 @@ public class RatingAdapter extends BaseAdapter{
 		TextView percent = (TextView) vi.findViewById(R.id.listRateText2);
 		RatingBar ratingBar = (RatingBar) vi.findViewById(R.id.ratingbar);
 		
-		name.setText(unitList.get(position).getName());
-		percent.setText(unitList.get(position).getPercentCompleted()*10+"%");
+		name.setText(objList.get(position).getPara1());
+		percent.setText(objList.get(position).getPara2());
 		ratingBar.setClickable(false);
-		ratingBar.setRating((float)unitList.get(position).getScored()/2);
-		
+		ratingBar.setRating(objList.get(position).getPara3());
 		return vi;
 	}
 

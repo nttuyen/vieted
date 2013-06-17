@@ -10,24 +10,24 @@ package com.vieted.android.app.domain;
 public class Unit extends VietEdDomain {
     //TODO: need a name???
     protected String name;
-    protected byte percentCompleted;
-    protected byte scored;
+    protected int percentCompleted;
+    protected float scored;
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public byte getPercentCompleted() {
+	public int getPercentCompleted() {
 		return percentCompleted;
 	}
-	public void setPercentCompleted(byte percentCompleted) {
+	public void setPercentCompleted(int percentCompleted) {
 		this.percentCompleted = percentCompleted;
 	}
-	public byte getScored() {
+	public float getScored() {
 		return scored;
 	}
-	public void setScored(byte scored) {
+	public void setScored(float scored) {
 		this.scored = scored;
 	}
     

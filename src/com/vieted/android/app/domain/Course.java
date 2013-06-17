@@ -8,8 +8,8 @@ public class Course extends VietEdDomain {
     public static final byte COURSE_ADVANCED = 12;
 
     protected String name;
-    protected byte percentCompleted;
-    protected byte scored;
+    protected float percentCompleted;
+    protected float scored;
     protected String teacher;
     protected byte level;
     
@@ -27,7 +27,7 @@ public class Course extends VietEdDomain {
 
 
 
-	public byte getPercentCompleted() {
+	public float getPercentCompleted() {
 		return percentCompleted;
 	}
 
@@ -39,7 +39,7 @@ public class Course extends VietEdDomain {
 
 
 
-	public byte getScored() {
+	public float getScored() {
 		return scored;
 	}
 

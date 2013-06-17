@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Lesson extends VietEdDomain {
     protected String name;
-    protected byte scored;
+    protected float scored;
 
     protected String teacher;
 
