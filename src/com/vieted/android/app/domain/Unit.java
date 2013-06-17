@@ -12,4 +12,25 @@ public class Unit extends VietEdDomain {
     protected String name;
     protected byte percentCompleted;
     protected byte scored;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public byte getPercentCompleted() {
+		return percentCompleted;
+	}
+	public void setPercentCompleted(byte percentCompleted) {
+		this.percentCompleted = percentCompleted;
+	}
+	public byte getScored() {
+		return scored;
+	}
+	public void setScored(byte scored) {
+		this.scored = scored;
+	}
+    
+    
+    
 }

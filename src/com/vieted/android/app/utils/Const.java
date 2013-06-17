@@ -2,6 +2,11 @@
 
 package com.vieted.android.app.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vieted.android.app.domain.Course;
+
 /**
  * Static container class for holding a reference to your YouTube Developer Key.
  */
@@ -14,5 +19,6 @@ public class Const {
    * register a new developer key.
    */
   public static final String GOOGLE_API_ANDROID_DEVELOPER_KEY = "AIzaSyA1KOSgHVeiSvr7WltHy2fu3PvmRmZfwL0";
+  public static final List<Course> DEMO_LIST = new ArrayList<Course>();
 
 }

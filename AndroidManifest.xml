@@ -51,5 +51,8 @@
                   android:configChanges="orientation"
             />
         <activity android:name=".activity.ProfileActivity"></activity>
+        <activity android:name=".activity.ListCourseActivity"></activity>
+        <activity android:name=".activity.ListUnitActivity"></activity>
+        
     </application>
 </manifest> 

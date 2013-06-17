@@ -3,39 +3,38 @@ package com.vieted.android.app.adapter;
 import java.util.ArrayList;
 
 import com.vieted.android.app.R;
-import com.vieted.android.app.domain.Course;
+import com.vieted.android.app.domain.Unit;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class ListCourseAdapter extends BaseAdapter{
-	
-	private ArrayList<Course> mListCourses;
+public class RatingAdapter extends BaseAdapter{
+	ArrayList<Unit> unitList;
 	private LayoutInflater mLayoutInflater;
-	
-	
 
-	public ListCourseAdapter(ArrayList<Course> mListCourses,
+	
+	public RatingAdapter(ArrayList<Unit> unitList,
 			Context context) {
 		super();
-		this.mListCourses = mListCourses;
-		mLayoutInflater = LayoutInflater.from(context); 
+		this.unitList = unitList;
+		mLayoutInflater = LayoutInflater.from(context);
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return mListCourses.size();
+		return unitList.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return mListCourses.get(arg0);
+		return unitList.get(arg0);
 	}
 
 	@Override
@@ -49,14 +48,16 @@ public class ListCourseAdapter extends BaseAdapter{
 		// TODO Auto-generated method stub
 		View vi = convertView;
 		if (convertView== null) 
-			vi= mLayoutInflater.inflate(R.layout.item_list_course,null);
-		TextView name = (TextView) vi.findViewById(R.id.listCoureName);
-		TextView teacher = (TextView) vi.findViewById(R.id.listCourseTeacher);
-		TextView level = (TextView) vi.findViewById(R.id.listCourseLevel);
+			vi= mLayoutInflater.inflate(R.layout.item_row_rating_bar,null);
+		TextView name = (TextView) vi.findViewById(R.id.listRateText1);
+		TextView percent = (TextView) vi.findViewById(R.id.listRateText2);
+		RatingBar ratingBar = (RatingBar) vi.findViewById(R.id.ratingbar);
 		
-		name.setText(mListCourses.get(position).getName());
-		teacher.setText(mListCourses.get(position).getTeacher());
-		level.setText(" "+mListCourses.get(position).getLevel());
+		name.setText(unitList.get(position).getName());
+		percent.setText(unitList.get(position).getPercentCompleted()*10+"%");
+		ratingBar.setClickable(false);
+		ratingBar.setRating((float)unitList.get(position).getScored()/2);
+		
 		return vi;
 	}
 
