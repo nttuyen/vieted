@@ -31,18 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-<<<<<<< .mine
-        <activity android:name=".activity.HomeActivity"/>
         <activity android:name=".activity.MyCourseActivity"/>
-        <activity android:name=".activity.LessonLectureActivity"/>
         <activity android:name=".activity.LessonExerciseActivity"/>
-
-
-
-
-
-
-=======
         <activity android:name=".activity.HomeActivity"
                   android:configChanges="orientation"
             />
@@ -53,7 +43,6 @@
                   android:screenOrientation="landscape"
                   android:configChanges="orientation"
             />
->>>>>>> .theirs
         <activity android:name=".activity.LessonMemoryActivity"/>
         <activity android:name=".activity.RegisterActivity"
                   android:configChanges="orientation"
