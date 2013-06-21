@@ -12,10 +12,38 @@ public class Course extends VietEdDomain {
     protected float scored;
     protected String teacher;
     protected byte level;
+    protected String url;
+    
+    
+    
     
     
 
-    public String getName() {
+    public String getUrl() {
+		return url;
+	}
+
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
+
+	public void setPercentCompleted(float percentCompleted) {
+		this.percentCompleted = percentCompleted;
+	}
+
+
+
+	public void setScored(float scored) {
+		this.scored = scored;
+	}
+
+
+
+	public String getName() {
 		return name;
 	}
 

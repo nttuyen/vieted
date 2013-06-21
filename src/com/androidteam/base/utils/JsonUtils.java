@@ -1,5 +1,6 @@
 package com.androidteam.base.utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,5 +20,29 @@ public class JsonUtils {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public static JSONObject getJsonObjectResult(JSONObject jsonObject){
+    	try {
+			JSONObject temp = jsonObject.getJSONObject("result");
+			return temp;
+    		
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+    	
+    }
+    
+    public static JSONArray getJsonArrayResult(JSONObject jsonObject){
+    	try {
+			JSONArray temp = jsonObject.getJSONArray("result");
+			return temp;
+    		
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+    	
     }
 }

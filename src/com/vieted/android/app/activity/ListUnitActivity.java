@@ -30,10 +30,8 @@ public class ListUnitActivity extends VietEdBaseActivity {
 	public void initbodyView() {
 		setLayoutBody(R.layout.activity_body_listcourse);
 		TextView label1 = (TextView) findViewById(R.id.listLabel1);
-		TextView label2 = (TextView) findViewById(R.id.listLabel2);
 		TextView label3 = (TextView) findViewById(R.id.listLabel3);
 		label1.setText("Name");
-		label2.setText("Completed");
 		label3.setText("Scored");
 		ArrayList<Unit> mListUnits = new ArrayList<Unit>();
 		ListView listView = (ListView) findViewById(R.id.listCourseTotal);
