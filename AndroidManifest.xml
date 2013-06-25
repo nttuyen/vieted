@@ -53,6 +53,7 @@
         <activity android:name=".activity.ProfileActivity"></activity>
         <activity android:name=".activity.ListCourseActivity"></activity>
         <activity android:name=".activity.ListUnitActivity"></activity>
+        <activity android:name=".activity.ListLessonActivity"></activity>
         
     </application>
 </manifest> 

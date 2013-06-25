@@ -1,14 +1,15 @@
 package com.vieted.android.app.domain;
 
-public class BaseObject {
-	protected String para1;
+public class BaseObject extends VietEdDomain{
+	protected String name;
 	protected String para2;
 	protected float para3;
-	public String getPara1() {
-		return para1;
+	
+	public String getName() {
+		return name;
 	}
-	public void setPara1(String para1) {
-		this.para1 = para1;
+	public void setName(String para1) {
+		this.name = para1;
 	}
 	public String getPara2() {
 		return para2;

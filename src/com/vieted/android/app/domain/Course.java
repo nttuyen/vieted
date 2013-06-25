@@ -12,22 +12,11 @@ public class Course extends VietEdDomain {
     protected float scored;
     protected String teacher;
     protected byte level;
-    protected String url;
     
     
     
     
     
-
-    public String getUrl() {
-		return url;
-	}
-
-
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
 
 
 

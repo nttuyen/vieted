@@ -33,7 +33,7 @@ public class RatingAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Object getItem(int arg0) {
+	public BaseObject getItem(int arg0) {
 		// TODO Auto-generated method stub
 		return objList.get(arg0);
 	}
@@ -54,7 +54,7 @@ public class RatingAdapter extends BaseAdapter{
 		TextView percent = (TextView) vi.findViewById(R.id.listRateText2);
 		RatingBar ratingBar = (RatingBar) vi.findViewById(R.id.ratingbar);
 		
-		name.setText(objList.get(position).getPara1());
+		name.setText(objList.get(position).getName());
 		percent.setText(objList.get(position).getPara2());
 		ratingBar.setClickable(false);
 		ratingBar.setRating(objList.get(position).getPara3());

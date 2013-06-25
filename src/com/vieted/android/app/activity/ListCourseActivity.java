@@ -1,5 +1,6 @@
 package com.vieted.android.app.activity;
 
+import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -86,6 +87,8 @@ public class ListCourseActivity extends VietEdBaseActivity{
 				// TODO Auto-generated method stub
 				String url = mListCourses.get(arg2).getUrl();
 				Intent intent = new Intent(ListCourseActivity.this,ListUnitActivity.class);
+				intent.putExtra("url",url);
+				System.out.println(url);
 				startActivity(intent);
 			}
 		});

@@ -12,7 +12,7 @@ import com.androidteam.base.task.RestAsyncTask;
 public class GetCourseListTask extends RestAsyncTask{
     public GetCourseListTask() {
         this.url = "http://dev.vieted.com/course";
-        this.addParam("api", "/user/login");
+        this.addParam("api", "/course");
         this.addParam("_step", "/course");
         this.addParam("_lname", "dev");
         this.addParam("_cl_token", "");
