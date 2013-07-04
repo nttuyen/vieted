@@ -23,7 +23,7 @@ import java.util.Map;
  * Time: 2:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class CourseListActivity extends VietEdBaseActivity {
+public class MyCourseActivity extends VietEdBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTextHeader("My Courses");
@@ -49,7 +49,7 @@ public class CourseListActivity extends VietEdBaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(CourseListActivity.this, LessonLectureActivity.class);
+                Intent intent = new Intent(MyCourseActivity.this, LessonLectureActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

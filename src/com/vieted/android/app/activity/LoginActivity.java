@@ -62,8 +62,6 @@ public class LoginActivity extends VietEdBaseActivity {
 				LoginActivity.this.loginTask
 						.setRestAsyncTaskListener(LoginActivity.this);
 				LoginActivity.this.loginTask.execute();
-				JSONObject temp = loginTask.getLastResult();
-				System.out.println(temp);
 			}
 		});
 	}

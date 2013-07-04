@@ -31,6 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MyCourseActivity"/>
+        <activity android:name=".activity.LessonExerciseActivity"/>
         <activity android:name=".activity.HomeActivity"
                   android:configChanges="orientation"
             />
@@ -57,5 +59,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ListCourseActivity"></activity>
+        <activity android:name=".activity.ListUnitActivity"></activity>
+        <activity android:name=".activity.ListLessonActivity"></activity>
+        
     </application>
 </manifest> 

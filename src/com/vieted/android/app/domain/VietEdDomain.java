@@ -11,8 +11,17 @@ import java.io.Serializable;
  */
 public class VietEdDomain implements Serializable {
     protected long id;
+    protected String url;
+    
+    
 
-    public long getId() {
+    public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public long getId() {
         return this.id;
     }
     public void setId(long id) {

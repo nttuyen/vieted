@@ -13,7 +13,7 @@ public class LoginTask extends RestAsyncTask {
     public LoginTask(String username, String password) {
         super();
         this.url = "http://dev.vieted.com/user/login";
-        this.url = null;
+        //this.url = null;
         this.addParam("api", "/user/login");
         this.addParam("_step", "account");
         this.addParam("_lname", "dev");
