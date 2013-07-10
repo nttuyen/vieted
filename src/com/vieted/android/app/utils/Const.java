@@ -20,6 +20,4 @@ public class Const {
    */
   public static final String GOOGLE_API_ANDROID_DEVELOPER_KEY = "AIzaSyA1KOSgHVeiSvr7WltHy2fu3PvmRmZfwL0";
   public static final String VIETED_API_URL_BASE = "http://dev.vieted.com";
-  public static final List<Course> DEMO_LIST = new ArrayList<Course>();
-
 }

@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.androidteam.base.task.RestAsyncTask;
-import com.androidteam.base.widget.ActionBar;
+import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
 import com.vieted.android.app.task.HomeTask;
-import com.vieted.android.app.task.VoidTask;
 
 /**
  * Created with IntelliJ IDEA.

@@ -8,7 +8,7 @@ import android.content.DialogInterface;
 
 public class UIContextHelper {
     private final Context context;
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog = null;
 
     public UIContextHelper(Context context) {
         this.context = context;
@@ -19,6 +19,7 @@ public class UIContextHelper {
     }
 
     public void showLoading(String message, boolean cancelable) {
+        if(this.context == null) return;
         progressDialog = new ProgressDialog(this.context);
         if(this.context instanceof Activity) {
             progressDialog.setOwnerActivity((Activity)this.context);
@@ -35,6 +36,7 @@ public class UIContextHelper {
     }
 
     public void showErrDialog(String title, String message) {
+        if(this.context == null) return;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.context);
         dialog.setMessage(message).setTitle(title)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

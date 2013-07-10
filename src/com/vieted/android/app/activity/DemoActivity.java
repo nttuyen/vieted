@@ -22,18 +22,6 @@ public class DemoActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UIContextHelper contextHelper = new UIContextHelper(this);
-        String jsonString = "{\"result\":true,\"age\":18, \"test1\":{\"name\":\"My Name\"}, \"values\":[\"value 1\", \"value 2\"]}";
-        try {
-            JSONObject json = new JSONObject(jsonString);
-            Test test = JsonGenericConverter.convert(json, Test.class);
-            contextHelper.showErrDialog("resultABC", test.isResultABC() ? "true" : "false");
-            contextHelper.showErrDialog("age", "" + test.getAge());
-        } catch (JSONException ex) {
-            contextHelper.showErrDialog("error", ex.getMessage());
-            Log.e("JSON", "JSON exception", ex);
-        }
-        contextHelper.showErrDialog("json", "test");
     }
 
     public static class Test {

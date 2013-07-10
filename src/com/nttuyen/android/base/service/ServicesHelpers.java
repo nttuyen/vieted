@@ -2,11 +2,7 @@ package com.nttuyen.android.base.service;
 
 import android.content.Context;
 import com.nttuyen.android.base.handler.Handler;
-import com.nttuyen.android.base.service.GenericServiceObserver;
-import com.nttuyen.android.base.service.Service;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.nttuyen.android.base.service.observer.GenericServiceObserver;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +13,11 @@ import java.util.List;
  */
 public class ServicesHelpers {
 
+    //Use when run background service
+    public static Service startService(Service service) {
+        service.start();
+        return service;
+    }
     public static Service startService(Service service, Context context) {
         return startService(service, context, null);
     }

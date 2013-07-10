@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_vieted" default="compile.module.vieted">
+  <dirname property="module.vieted.basedir" file="${ant.file.module_vieted}"/>
+  
+  <property name="module.jdk.home.vieted" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.vieted" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.vieted" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.vieted" value="${compiler.args}"/>
+  
+  <property name="vieted.output.dir" value="${module.vieted.basedir}/out/production/VietEd"/>
+  <property name="vieted.testoutput.dir" value="${module.vieted.basedir}/out/test/VietEd"/>
+  
+  <path id="vieted.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="vieted.module.production.classpath">
+    <path refid="${module.jdk.classpath.vieted}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="vieted.runtime.production.module.classpath">
+    <pathelement location="${vieted.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="vieted.module.classpath">
+    <path refid="${module.jdk.classpath.vieted}"/>
+    <pathelement location="${vieted.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="vieted.runtime.module.classpath">
+    <pathelement location="${vieted.testoutput.dir}"/>
+    <pathelement location="${vieted.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.vieted">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.vieted">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.vieted"/>
+  </patternset>
+  
+  <path id="vieted.module.sourcepath">
+    <dirset dir="${module.vieted.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.vieted" depends="compile.module.vieted.production,compile.module.vieted.tests" description="Compile module VietEd"/>
+  
+  <target name="compile.module.vieted.production" depends="register.custom.compilers" description="Compile module VietEd; production classes">
+    <mkdir dir="${vieted.output.dir}"/>
+    <javac2 destdir="${vieted.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.vieted}/javac">
+      <compilerarg line="${compiler.args.vieted}"/>
+      <bootclasspath refid="vieted.module.bootclasspath"/>
+      <classpath refid="vieted.module.production.classpath"/>
+      <src refid="vieted.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.vieted"/>
+    </javac2>
+    
+    <copy todir="${vieted.output.dir}">
+      <fileset dir="${module.vieted.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.vieted"/>
+      </fileset>
+      <fileset dir="${module.vieted.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.vieted"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.vieted.tests" depends="register.custom.compilers,compile.module.vieted.production" description="compile module VietEd; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.vieted" description="cleanup module">
+    <delete dir="${vieted.output.dir}"/>
+    <delete dir="${vieted.testoutput.dir}"/>
+  </target>
+</project>

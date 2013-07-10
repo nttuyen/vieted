@@ -5,7 +5,7 @@
     android:background="@drawable/main_bg_image"
     android:orientation="vertical" >
 
-    <com.androidteam.base.widget.ActionBar
+    <com.nttuyen.android.base.widget.ActionBar
             android:id="@+id/actionbar"
             style="@style/ActionBar"
             />

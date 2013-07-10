@@ -1,6 +1,5 @@
-package com.nttuyen.android.base.utils;
+package com.nttuyen.android.base.request;
 
-import com.nttuyen.android.base.request.Request;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;

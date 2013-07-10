@@ -24,7 +24,7 @@
                   android:layout_height="wrap_content"
                   android:text="Exercise text here"/>
 
-        <com.androidteam.base.widget.Mp3Player
+        <com.nttuyen.android.base.widget.Mp3Player
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mp3Player"

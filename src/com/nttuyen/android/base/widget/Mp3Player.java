@@ -1,4 +1,4 @@
-package com.androidteam.base.widget;
+package com.nttuyen.android.base.widget;
 
 import android.content.Context;
 import android.media.AudioManager;

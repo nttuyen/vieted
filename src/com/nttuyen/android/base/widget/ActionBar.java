@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.androidteam.base.widget;
+package com.nttuyen.android.base.widget;
 
 import java.util.LinkedList;
 import android.content.ActivityNotFoundException;
@@ -153,7 +153,7 @@ public class ActionBar extends RelativeLayout implements OnClickListener {
     }
 
     /**
-     * Adds a list of {@link com.androidteam.base.widget.ActionBar.Action}s.
+     * Adds a list of {@link com.nttuyen.android.base.widget.ActionBar.Action}s.
      * @param actionList the actions to add
      */
     public void addActions(ActionList actionList) {
@@ -164,7 +164,7 @@ public class ActionBar extends RelativeLayout implements OnClickListener {
     }
 
     /**
-     * Adds a new {@link com.androidteam.base.widget.ActionBar.Action}.
+     * Adds a new {@link com.nttuyen.android.base.widget.ActionBar.Action}.
      * @param action the action to add
      */
     public void addAction(Action action) {
@@ -173,7 +173,7 @@ public class ActionBar extends RelativeLayout implements OnClickListener {
     }
 
     /**
-     * Adds a new {@link com.androidteam.base.widget.ActionBar.Action} at the specified index.
+     * Adds a new {@link com.nttuyen.android.base.widget.ActionBar.Action} at the specified index.
      * @param action the action to add
      * @param index the position at which to add the action
      */
@@ -222,7 +222,7 @@ public class ActionBar extends RelativeLayout implements OnClickListener {
     }
 
     /**
-     * Inflates a {@link android.view.View} with the given {@link com.androidteam.base.widget.ActionBar.Action}.
+     * Inflates a {@link android.view.View} with the given {@link com.nttuyen.android.base.widget.ActionBar.Action}.
      * @param action the action to inflate
      * @return a view
      */
@@ -239,7 +239,7 @@ public class ActionBar extends RelativeLayout implements OnClickListener {
     }
 
     /**
-     * A {@link java.util.LinkedList} that holds a list of {@link com.androidteam.base.widget.ActionBar.Action}s.
+     * A {@link java.util.LinkedList} that holds a list of {@link com.nttuyen.android.base.widget.ActionBar.Action}s.
      */
     public static class ActionList extends LinkedList<Action> {
     }

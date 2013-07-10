@@ -4,12 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import com.androidteam.base.listener.RestAsyncTaskListener;
 import com.androidteam.base.task.RestAsyncTask;
 import com.androidteam.base.utils.ActivityUtils;
-import com.androidteam.base.widget.ActionBar;
+import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
 import org.json.JSONException;
 

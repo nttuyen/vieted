@@ -1,17 +1,12 @@
 package com.vieted.android.app.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import com.androidteam.base.activity.BaseActivity;
 import com.androidteam.base.task.RestAsyncTask;
-import com.androidteam.base.utils.ActivityUtils;
-import com.androidteam.base.widget.ActionBar;
+import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
 
 /**

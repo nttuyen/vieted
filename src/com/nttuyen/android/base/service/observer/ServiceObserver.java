@@ -1,4 +1,6 @@
-package com.nttuyen.android.base.service;
+package com.nttuyen.android.base.service.observer;
+
+import com.nttuyen.android.base.service.Service;
 
 /**
  * Created with IntelliJ IDEA.

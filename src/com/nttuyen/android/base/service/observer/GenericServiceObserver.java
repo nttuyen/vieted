@@ -1,7 +1,10 @@
-package com.nttuyen.android.base.service;
+package com.nttuyen.android.base.service.observer;
 
 import android.content.Context;
 import com.nttuyen.android.base.handler.Handler;
+import com.nttuyen.android.base.service.Service;
+import com.nttuyen.android.base.service.ServiceException;
+import com.nttuyen.android.base.service.observer.ServiceObserver;
 import com.nttuyen.android.base.utils.UIContextHelper;
 
 /**
@@ -53,6 +56,7 @@ public class GenericServiceObserver implements ServiceObserver {
 
     @Override
     public void onChange(Service service) {
+        this.contextHelper.dismissLoading();
         try {
             if(this.onChangeHandler != null) {
                 this.onChangeHandler.handle(service.get());

@@ -3,18 +3,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-    <com.androidteam.base.widget.Mp3Player
+    <com.nttuyen.android.base.widget.Mp3Player
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mp3Player1"
         />
-    <com.androidteam.base.widget.Mp3Player
+    <com.nttuyen.android.base.widget.Mp3Player
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mp3Player2"
             android:layout_below="@id/mp3Player1"
             />
-    <com.androidteam.base.widget.Mp3Player
+    <com.nttuyen.android.base.widget.Mp3Player
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mp3Player3"

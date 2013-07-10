@@ -4,12 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
-import com.vieted.android.app.domain.Question;
-import com.vieted.android.app.fragment.QuestionFragment;
-import com.vieted.android.app.utils.VietEdState;
+import com.vieted.android.app.v1.VietEdState;
+import com.vieted.android.app.v1.dto.Question;
+import com.vieted.android.app.v1.fragment.QuestionFragment;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public class QuestionPagerAdapter extends FragmentPagerAdapter implements Serial
 
     public QuestionPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.questions = VietEdState.getInstance().getCurrentQuiz().getQuestions();
+        this.questions = VietEdState.getInstance().getCurrentExercise().getQuestions();
         int size = questions.size();
         this.fragments = new Fragment[size];
         this.currentMaxPage = 1;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:id="@+id/controlButtonContainer"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+        >
+        <!--<Button android:id="@+id/lessonButtonLecture"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Lecture"
+            />-->
+        <Button android:id="@+id/lessonButtonExercise"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Exercise"
+            />
+        <Button android:id="@+id/lessonButtonMemory"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Memory"
+            />
+    </LinearLayout>
+    <fragment android:id="@+id/youtubePlayerFragment"
+              android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+              android:layout_alignParentTop="true"
+              android:layout_above="@id/controlButtonContainer"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"/>
+</RelativeLayout>

@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.androidteam.base.task.RestAsyncTask;
-import com.androidteam.base.widget.ActionBar;
+import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
 import com.vieted.android.app.task.ProfileTask;
 
