@@ -2,7 +2,6 @@ package com.vieted.android.app.utils;
 
 import com.google.android.youtube.player.YouTubePlayer;
 import com.vieted.android.app.domain.*;
-import com.vieted.android.app.repository.Repository;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,8 +22,6 @@ public class VietEdState {
     private VietEdState() {
         //TODO: init repository
     }
-
-    private Repository repository;
 
     private Course currentCourse;
     private Unit currentUnit;

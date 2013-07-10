@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
-import com.vieted.android.app.activity.HomeActivity;
 
 /**
  * Created with IntelliJ IDEA.
