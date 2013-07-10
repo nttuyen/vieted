@@ -26,7 +26,7 @@ public abstract class VietEdBaseActivity extends BaseActivity<RestAsyncTask> {
         this.actionBar.setTitle("Home");
         bodyLayout = (LinearLayout) findViewById(R.id.bodyLayout);
         this.setHomeNothingAction();
-        this.actionBar.addAction(new ActionBar.IntentAction(this, new Intent(this, HomeActivity.class), R.drawable.vieted_icon));
+        //this.actionBar.addAction(new ActionBar.IntentAction(this, new Intent(this, HomeActivity.class), R.drawable.vieted_icon));
     }
 
 	@Override

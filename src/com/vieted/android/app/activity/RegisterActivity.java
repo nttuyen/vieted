@@ -9,9 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-
 import com.androidteam.base.task.RestAsyncTask;
-import com.androidteam.base.utils.ActivityUtils;
 import com.vieted.android.app.R;
 import com.vieted.android.app.task.RegisterTask;
 import com.vieted.android.app.task.VoidTask;
@@ -66,7 +64,7 @@ public class RegisterActivity extends VietEdBaseActivity {
 				String password = txtPassword.getText().toString().trim();
 				String passwordRe = txtPasswordRe.getText().toString().trim();
 				if(!password.equals(passwordRe)){
-					ActivityUtils.showErrDialog(RegisterActivity.this, "Password and RetypePass are not match!");
+					//ActivityUtils.showErrDialog(RegisterActivity.this, "Password and RetypePass are not match!");
 					
 				}
 				else {
@@ -93,10 +91,10 @@ public class RegisterActivity extends VietEdBaseActivity {
 	protected void handleGetSuccess(RestAsyncTask task) {
 		// TODO Auto-generated method stub
 		if (task == this.regisTask) {
-			Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+			/*Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
 			startActivity(intent);
 			overridePendingTransition(R.anim.slide_in_right,
-					R.anim.slide_out_left);
+					R.anim.slide_out_left);*/
 		}
 
 	}

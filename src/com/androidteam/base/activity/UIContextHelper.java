@@ -5,12 +5,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import com.androidteam.base.listener.RestAsyncTaskListener;
-import com.androidteam.base.task.RestAsyncTask;
-import com.androidteam.base.utils.ActivityUtils;
-import org.json.JSONException;
-
-import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.

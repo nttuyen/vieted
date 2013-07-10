@@ -1,10 +1,8 @@
 package com.androidteam.base.activity;
 
-import android.app.ProgressDialog;
 import android.support.v4.app.FragmentActivity;
 import com.androidteam.base.listener.RestAsyncTaskListener;
 import com.androidteam.base.task.RestAsyncTask;
-import com.androidteam.base.utils.ActivityUtils;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -63,18 +61,18 @@ public abstract class BaseFragmentSupportActivity<Task extends RestAsyncTask> ex
     @Override
     public void onTaskFailure(Task data, String message) {
         this.contextHelper.dismissLoading();
-        ActivityUtils.showErrDialog(this, message);
+        //ActivityUtils.showErrDialog(this, message);
     }
 
     protected void processError(Exception exception) {
         this.contextHelper.dismissLoading();
 
         if (exception instanceof IOException) {
-            ActivityUtils.showErrDialog(this, "Connection failed.");
+            //ActivityUtils.showErrDialog(this, "Connection failed.");
         } else if (exception instanceof JSONException) {
-            ActivityUtils.showErrDialog(this, "Data format error.");
+            //ActivityUtils.showErrDialog(this, "Data format error.");
         } else {
-            ActivityUtils.showErrDialog(this, exception.getMessage());
+            //ActivityUtils.showErrDialog(this, exception.getMessage());
         }
     }
 }
