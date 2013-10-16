@@ -29,6 +29,28 @@ public class JsonConvertHelper {
         converters.put(name, converter);
     }
 
+	public static <T> void fromJson(JSONObject json, T value) throws JSONException {
+		Class<?> type = value.getClass();
+		JsonConverter converter = converters.get(type.getName());
+		if(converter == null) {
+			converter = converters.get(JsonGenericConverter.class.getName());
+		}
+		if(converter == null)
+			return;
+
+		converter.fromJson(json, value);
+	}
+	public static <T> void fromJson(JSONArray json, Class<T> type, List<T> list) throws JSONException {
+		JsonConverter converter = converters.get(type.getName());
+		if(converter == null) {
+			converter = converters.get(JsonGenericConverter.class.getName());
+		}
+		if(converter == null)
+			return;
+
+		converter.fromJson(json, type, list);
+	}
+
     public static <T> T convert(JSONObject json, Class<T> type) throws JSONException {
         JsonConverter converter = converters.get(type.getName());
         if(converter == null) {

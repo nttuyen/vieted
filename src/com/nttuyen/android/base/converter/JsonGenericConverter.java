@@ -13,63 +13,49 @@ public class JsonGenericConverter extends JsonConverter {
         JsonConvertHelper.register(JsonGenericConverter.class.getName(), new JsonGenericConverter());
     }
 
-    public <T> T convert(JSONObject json, Class<T> type) throws JSONException {
-        try {
-            T value = type.newInstance();
+	public <T> void fromJson(JSONObject json, T value) throws JSONException {
+		try {
+			Class<?> type = value.getClass();
 
-            Field[] fields = type.getDeclaredFields();
-            for(Field field : fields) {
-                String jsonField = field.getName();
-                Json annotation = field.getAnnotation(Json.class);
-                if(annotation != null) {
-                    jsonField = annotation.name();
-                }
-                if(json.isNull(jsonField)) {
-                    continue;
-                }
+			Field[] fields = type.getDeclaredFields();
+			for(Field field : fields) {
+				String jsonField = field.getName();
+				Json annotation = field.getAnnotation(Json.class);
+				if(annotation != null) {
+					jsonField = annotation.name();
+				}
+				if(json.isNull(jsonField)) {
+					continue;
+				}
 
-                if(annotation!= null && annotation.isCollection()) {
-                    //TODO: only support for ListType
-                    if(!field.getType().equals(List.class)) {
-                        continue;
-                    }
+				if(annotation!= null && annotation.isCollection()) {
+					//TODO: only support for ListType
+					if(!field.getType().equals(List.class)) {
+						continue;
+					}
 
-                    Class<?> typeInList = annotation.type();
-                    JSONArray jsonArray = json.getJSONArray(jsonField);
-//                    int size = jsonArray.length();
-//                    List<Object> list = new ArrayList<Object>(size);
-//                    for(int i = 0; i < size; i++) {
-//                        if(isPrimaryType(typeInList)) {
-//                            list.add(getValueInJsonArray(jsonArray, i, typeInList));
-//                        } else {
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            Object obj = convert(jsonObject, typeInList);
-//                            list.add(obj);
-//                        }
-//                    }
+					Class<?> typeInList = annotation.type();
+					JSONArray jsonArray = json.getJSONArray(jsonField);
 
-                    List<?> list = this.convert(jsonArray, typeInList);
-                    if(!field.isAccessible()) {
-                        field.setAccessible(true);
-                    }
-                    field.set(value, list);
-                    continue;
-                }
+					List<?> list = this.convert(jsonArray, typeInList);
 
-                setField(value, field, jsonField, json);
+					if(!field.isAccessible()) {
+						field.setAccessible(true);
+					}
+					field.set(value, list);
+					continue;
+				}
 
-            }
-            return value;
-        } catch (InstantiationException e) {
-            JSONException ex = new JSONException("Can not create new instance");
-            ex.initCause(e);
-            throw ex;
-        } catch (IllegalAccessException e) {
-            JSONException ex = new JSONException("Can not create new instance");
-            ex.initCause(e);
-            throw ex;
-        }
-    }
+				setField(value, field, jsonField, json);
+
+			}
+			//return value;
+		} catch (IllegalAccessException e) {
+			JSONException ex = new JSONException("Can not create new instance");
+			ex.initCause(e);
+			throw ex;
+		}
+	}
 
     private <T> void setField(T value, Field field, String jsonField, JSONObject json) throws JSONException {
         try {

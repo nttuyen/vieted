@@ -8,28 +8,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: nttuyen
- * Date: 6/28/13
- * Time: 10:23 PM
- * To change this template use File | Settings | File Templates.
+ * @author nttuyen266@gmail.com
  */
 public abstract class JsonConverter {
-    public abstract <T> T convert(JSONObject json, Class<T> type) throws JSONException;
+	public abstract <T> void fromJson(JSONObject json, T value) throws JSONException;
+
+	public <T> T convert(JSONObject json, Class<T> type) throws JSONException {
+		if(isPrimaryType(type)) {
+			throw new UnsupportedOperationException("Can not convert to type: " + type.getName());
+		}
+
+		try {
+			T value = type.newInstance();
+			this.fromJson(json, value);
+			return value;
+
+		} catch (InstantiationException e) {
+			JSONException ex = new JSONException("can not create new instance");
+			ex.initCause(e);
+			throw ex;
+		} catch (IllegalAccessException e) {
+			JSONException ex = new JSONException("can not create new instance");
+			ex.initCause(e);
+			throw ex;
+		}
+	}
+
+	public <T> void fromJson(JSONArray json, Class<T> type, List<T> list) throws JSONException{
+		int size = json.length();
+		for(int i = 0; i< size; i++) {
+			if(isPrimaryType(type)) {
+				list.add(getValueInJsonArray(json, i, type));
+			} else {
+				JSONObject jsonObject = json.getJSONObject(i);
+				T val = this.convert(jsonObject, type);
+				list.add(val);
+			}
+		}
+	}
 
     public <T> List<T> convert(JSONArray json, Class<T> type) throws JSONException {
         List<T> values = new ArrayList<T>();
-        int size = json.length();
-        for(int i = 0; i< size; i++) {
-            if(isPrimaryType(type)) {
-                values.add(getValueInJsonArray(json, i, type));
-            } else {
-                JSONObject jsonObject = json.getJSONObject(i);
-                T val = this.convert(jsonObject, type);
-                values.add(val);
-            }
-        }
-        return values;
+		this.fromJson(json, type, values);
+		return values;
     }
 
     protected  <T> T getValueInJsonArray(JSONArray jsonArray, int index, Class<T> type) throws JSONException {
