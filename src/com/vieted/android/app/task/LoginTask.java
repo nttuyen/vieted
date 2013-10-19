@@ -9,6 +9,7 @@ import com.androidteam.base.task.RestAsyncTask;
  * Time: 2:24 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LoginTask extends RestAsyncTask {
     public LoginTask(String username, String password) {
         super();

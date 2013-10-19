@@ -23,6 +23,7 @@ import java.util.Map;
  * Time: 2:32 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class MyCourseActivity extends VietEdBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

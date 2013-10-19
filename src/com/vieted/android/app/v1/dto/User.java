@@ -11,6 +11,7 @@ import java.io.Serializable;
  * Time: 8:51 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class User implements Serializable{
     private String id;
     @Json(name = "lname")

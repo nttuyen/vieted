@@ -20,6 +20,7 @@ import com.vieted.android.app.v1.service.VietEdService;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class LoginActivity extends VietEdBaseActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -17,6 +17,7 @@ import java.util.Map;
  * Time: 8:13 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class VietEdService<Result> extends AsyncRestWithCacheService<Map<String, String>, Result> {
     protected final int method;
     protected final String path;

@@ -9,6 +9,7 @@ import com.androidteam.base.task.RestAsyncTask;
  * Time: 2:33 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class GetCourseListTask extends RestAsyncTask{
     public GetCourseListTask() {
         this.url = "http://dev.vieted.com/course";

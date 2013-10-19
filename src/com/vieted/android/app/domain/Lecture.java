@@ -7,6 +7,7 @@ package com.vieted.android.app.domain;
  * Time: 10:20 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Lecture extends VietEdDomain {
     protected String name;
     protected String video;

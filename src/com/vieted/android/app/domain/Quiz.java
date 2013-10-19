@@ -9,6 +9,7 @@ import java.util.List;
  * Time: 10:29 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Quiz extends VietEdDomain {
     protected String name;
     protected String description;

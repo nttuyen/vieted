@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Time: 10:13 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class VietEdDomain implements Serializable {
     protected long id;
     protected String url;

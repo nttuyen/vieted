@@ -11,6 +11,7 @@ import com.vieted.android.app.R;
  * Time: 9:44 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LessonMemoryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

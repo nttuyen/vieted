@@ -9,6 +9,7 @@ import com.androidteam.base.task.RestAsyncTask;
  * Time: 1:58 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class HomeTask extends RestAsyncTask {
     public HomeTask() {
         this.url = null;

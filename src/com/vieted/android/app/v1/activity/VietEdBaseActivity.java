@@ -15,6 +15,7 @@ import com.vieted.android.app.R;
  * Time: 8:39 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class VietEdBaseActivity extends Activity {
     protected ActionBar actionBar;
     protected LinearLayout bodyLayout;

@@ -18,6 +18,7 @@ import com.vieted.android.app.activity.ProfileActivity;
  * Time: 10:56 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class HomeActivity extends VietEdBaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {

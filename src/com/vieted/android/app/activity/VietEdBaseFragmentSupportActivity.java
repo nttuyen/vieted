@@ -16,6 +16,7 @@ import com.vieted.android.app.R;
  * Time: 10:59 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class VietEdBaseFragmentSupportActivity extends BaseFragmentSupportActivity<RestAsyncTask> {
     protected ActionBar actionBar;
     protected LinearLayout bodyLayout;

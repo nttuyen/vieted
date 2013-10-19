@@ -7,6 +7,7 @@ package com.vieted.android.app.v1.dto;
  * Time: 9:16 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ExerciseRestResult {
     private Exercise exercise;
 

@@ -19,6 +19,7 @@ import java.util.Map;
  * Time: 6:56 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LazyAdapter extends BaseAdapter {
     private Activity activity;
     private List<Map<String, String>> data;

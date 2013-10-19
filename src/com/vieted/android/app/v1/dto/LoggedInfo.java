@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Time: 9:13 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LoggedInfo implements Serializable{
     private String username;
     private String password;

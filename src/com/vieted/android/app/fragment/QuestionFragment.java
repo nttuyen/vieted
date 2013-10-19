@@ -18,6 +18,7 @@ import com.vieted.android.app.utils.VietEdState;
  * Time: 7:12 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class QuestionFragment extends Fragment {
     private View root;
 

@@ -1,5 +1,6 @@
 package com.vieted.android.app.domain;
 
+@Deprecated
 public class BaseObject extends VietEdDomain{
 	protected String name;
 	protected String para2;

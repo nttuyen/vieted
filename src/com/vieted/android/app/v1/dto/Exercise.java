@@ -12,6 +12,7 @@ import java.util.List;
  * Time: 4:47 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Exercise implements Serializable {
     private String id;
     private String name;

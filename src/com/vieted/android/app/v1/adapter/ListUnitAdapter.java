@@ -25,6 +25,7 @@ import java.util.Map;
  * Time: 1:38 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ListUnitAdapter extends VietEdListBaseAdapter<Unit> {
     public ListUnitAdapter(Context context, Service<Map<String, String>, Course> service) {
         super(context, null);

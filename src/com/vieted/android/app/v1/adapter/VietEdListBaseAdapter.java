@@ -19,6 +19,7 @@ import java.util.List;
  * Time: 12:53 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class VietEdListBaseAdapter<T> extends BaseAdapter {
     protected Service service;
     protected int count;

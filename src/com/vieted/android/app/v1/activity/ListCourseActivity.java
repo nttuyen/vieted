@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
 public class ListCourseActivity extends VietEdBaseActivity {
     private Service<Map<String, String>, Course> listCourseService;
     @Override

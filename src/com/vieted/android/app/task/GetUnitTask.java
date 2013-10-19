@@ -2,6 +2,7 @@ package com.vieted.android.app.task;
 
 import com.androidteam.base.task.RestAsyncTask;
 
+@Deprecated
 public class GetUnitTask extends RestAsyncTask{
 	public GetUnitTask(String url, String api){
 		 this.url = "http://dev.vieted.com/"+url;

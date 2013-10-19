@@ -26,6 +26,7 @@ import java.util.Map;
  * Time: 1:12 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ListUnitActivity extends VietEdBaseActivity {
     private Service<Map<String, String>, Course> courseDetailService;
 

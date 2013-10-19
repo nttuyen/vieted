@@ -12,6 +12,7 @@ import java.util.Map;
  * Time: 7:03 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Question implements Serializable {
     private String questionText;
     private String audio;

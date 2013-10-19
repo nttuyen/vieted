@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+@Deprecated
 public class RatingAdapter extends BaseAdapter{
 	ArrayList<BaseObject> objList;
 	private LayoutInflater mLayoutInflater;

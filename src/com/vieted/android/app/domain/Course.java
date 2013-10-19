@@ -2,6 +2,7 @@ package com.vieted.android.app.domain;
 
 import java.util.List;
 
+@Deprecated
 public class Course extends VietEdDomain {
 
     public static final byte COURSE_BEGINNER = 1;

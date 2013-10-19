@@ -13,6 +13,7 @@ import java.util.List;
  * Time: 9:10 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Question implements Serializable {
     private String id;
     @Json(name = "content_display")

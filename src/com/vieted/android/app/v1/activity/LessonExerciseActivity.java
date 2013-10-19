@@ -37,6 +37,7 @@ import java.util.Map;
  * Time: 5:21 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LessonExerciseActivity extends VietEdFragmentSupportBaseActivity {
     private ViewPager questionPager;
     private YouTubePlayer player = null;

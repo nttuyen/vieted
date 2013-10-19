@@ -9,6 +9,7 @@ import com.vieted.android.app.v1.dto.*;
  * Time: 10:50 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class VietEdState {
     private static VietEdState instance;
     private VietEdState() {

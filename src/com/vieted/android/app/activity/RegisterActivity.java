@@ -14,6 +14,7 @@ import com.vieted.android.app.R;
 import com.vieted.android.app.task.RegisterTask;
 import com.vieted.android.app.task.VoidTask;
 
+@Deprecated
 public class RegisterActivity extends VietEdBaseActivity {
 	private RestAsyncTask regisTask;
 	private EditText txtUsername;

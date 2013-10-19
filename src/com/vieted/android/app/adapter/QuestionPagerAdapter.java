@@ -18,6 +18,7 @@ import java.util.List;
  * Time: 7:02 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class QuestionPagerAdapter extends FragmentPagerAdapter implements Serializable {
     private final List<Question> questions;
     private int currentMaxPage;

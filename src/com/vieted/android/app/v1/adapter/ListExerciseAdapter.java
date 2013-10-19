@@ -18,6 +18,7 @@ import com.vieted.android.app.v1.dto.Lesson;
  * Time: 5:26 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ListExerciseAdapter extends VietEdListBaseAdapter<Exercise> {
 
     public ListExerciseAdapter(Context context, Service service) {

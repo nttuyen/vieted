@@ -11,6 +11,7 @@ import com.vieted.android.app.v1.dto.LoggedInfo;
  * Time: 9:13 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class CheckHasLoggedInService extends AsyncService<Void, LoggedInfo> {
 
     @Override

@@ -9,6 +9,7 @@ import java.util.List;
  * Time: 10:19 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Lesson extends VietEdDomain {
     protected String name;
     protected float scored;

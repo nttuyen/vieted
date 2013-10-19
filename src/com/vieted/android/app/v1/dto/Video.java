@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Time: 4:46 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Video implements Serializable {
     private String id;
     private String type;

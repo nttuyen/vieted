@@ -9,6 +9,7 @@ import java.util.List;
  * Time: 10:32 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Note extends VietEdDomain {
     protected String descriptions;
     protected List<String> images;

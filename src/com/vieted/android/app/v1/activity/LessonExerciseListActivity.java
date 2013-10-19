@@ -21,6 +21,7 @@ import com.vieted.android.app.v1.dto.Lesson;
  * Time: 5:22 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LessonExerciseListActivity extends VietEdBaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {

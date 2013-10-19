@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Time: 12:46 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Staff implements Serializable {
     private long iid;
     private String name;

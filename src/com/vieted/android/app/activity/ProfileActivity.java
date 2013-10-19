@@ -23,6 +23,7 @@ import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
 import com.vieted.android.app.task.ProfileTask;
 
+@Deprecated
 public class ProfileActivity extends VietEdBaseActivity{
 	private final int CAMERA_PICTURE = 1;
 	private final int GALLERY_PICTURE = 2;

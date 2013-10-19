@@ -2,6 +2,7 @@ package com.vieted.android.app.task;
 
 import com.androidteam.base.task.RestAsyncTask;
 
+@Deprecated
 public class RegisterTask extends RestAsyncTask {
 	public RegisterTask(String pass,String mail, String name){
 		super();

@@ -10,6 +10,7 @@ import com.vieted.android.app.domain.Course;
 /**
  * Static container class for holding a reference to your YouTube Developer Key.
  */
+@Deprecated
 public class Const {
 
   /**

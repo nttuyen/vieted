@@ -28,6 +28,7 @@ import java.util.List;
  * Time: 11:03 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LessonExerciseFragmentSupportActivity extends VietEdBaseFragmentSupportActivity {
     private Quiz quiz;
     private ViewPager questionPager;

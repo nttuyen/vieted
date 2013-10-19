@@ -10,6 +10,7 @@ import com.vieted.android.app.domain.*;
  * Time: 10:41 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class VietEdState {
     private static VietEdState currentState;
     public static VietEdState getInstance() {
