@@ -1,4 +1,4 @@
-package com.vieted.android.app.v1;
+package com.vieted.android.app;
 
 /**
  * Created with IntelliJ IDEA.

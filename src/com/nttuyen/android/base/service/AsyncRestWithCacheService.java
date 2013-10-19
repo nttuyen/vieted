@@ -12,6 +12,7 @@ import org.json.JSONObject;
  * Time: 10:40 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class AsyncRestWithCacheService<Param, Result> extends BaseService<Param, Result> implements ServiceObserver {
     protected Param param;
 

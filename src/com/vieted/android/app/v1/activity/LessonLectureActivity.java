@@ -12,7 +12,7 @@ import com.nttuyen.android.base.request.Request;
 import com.nttuyen.android.base.service.Service;
 import com.nttuyen.android.base.service.ServicesHelpers;
 import com.vieted.android.app.R;
-import com.vieted.android.app.v1.Const;
+import com.vieted.android.app.Const;
 import com.vieted.android.app.v1.VietEdState;
 import com.vieted.android.app.v1.dto.Lesson;
 import com.vieted.android.app.v1.dto.Video;

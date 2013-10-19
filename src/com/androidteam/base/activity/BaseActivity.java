@@ -13,6 +13,7 @@ import java.io.IOException;
  * Time: 1:21 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class BaseActivity<Task extends RestAsyncTask> extends Activity implements RestAsyncTaskListener<Task> {
     protected UIContextHelper contextHelper;
     protected Task mainTask;

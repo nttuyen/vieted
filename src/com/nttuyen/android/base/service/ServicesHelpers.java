@@ -11,6 +11,7 @@ import com.nttuyen.android.base.service.observer.GenericServiceObserver;
  * Time: 11:08 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ServicesHelpers {
 
     //Use when run background service

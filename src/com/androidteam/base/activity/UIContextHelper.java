@@ -13,6 +13,7 @@ import android.content.DialogInterface;
  * Time: 11:35 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class UIContextHelper {
     private final Context context;
     private ProgressDialog progressDialog;

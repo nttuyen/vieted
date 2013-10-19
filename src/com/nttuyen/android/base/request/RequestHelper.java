@@ -26,6 +26,7 @@ import java.util.Map;
  * Time: 9:54 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class RequestHelper {
     public static String execute(HttpClient client, Request request) throws IOException {
         HttpUriRequest uriRequest = RequestHelper.createRequest(request);

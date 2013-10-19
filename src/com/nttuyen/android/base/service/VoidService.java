@@ -9,6 +9,7 @@ import com.nttuyen.android.base.service.observer.ServiceObserver;
  * Time: 8:35 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class VoidService extends BaseService<Void, Void> {
     @Override
     public void init(Void param) {}

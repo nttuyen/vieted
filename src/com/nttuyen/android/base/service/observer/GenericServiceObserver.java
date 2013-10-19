@@ -14,6 +14,7 @@ import com.nttuyen.android.base.utils.UIContextHelper;
  * Time: 9:03 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class GenericServiceObserver implements ServiceObserver {
     protected final Context context;
     protected final UIContextHelper contextHelper;

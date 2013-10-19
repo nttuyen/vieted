@@ -9,6 +9,7 @@ import com.androidteam.base.task.RestAsyncTask;
  * Time: 1:26 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public interface RestAsyncTaskListener<Task extends RestAsyncTask> {
     void onTaskStart();
     void onTaskProgress(Task task);

@@ -18,6 +18,7 @@ import java.io.IOException;
  * Time: 9:30 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class AsyncRestService<Result> extends AsyncService<Request, Result> {
     private static final HttpClient httpClient = new DefaultHttpClient();
     static {

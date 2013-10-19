@@ -14,6 +14,7 @@ import java.io.IOException;
  * Time: 10:42 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class BaseFragmentSupportActivity<Task extends RestAsyncTask> extends FragmentActivity implements RestAsyncTaskListener<Task> {
     protected final UIContextHelper contextHelper;
     protected Task mainTask;

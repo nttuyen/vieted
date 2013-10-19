@@ -4,7 +4,7 @@ import com.nttuyen.android.base.request.GenericRequest;
 import com.nttuyen.android.base.request.Request;
 import com.nttuyen.android.base.service.AsyncRestWithCacheService;
 import com.nttuyen.android.base.service.ServiceException;
-import com.vieted.android.app.v1.Const;
+import com.vieted.android.app.Const;
 import org.json.JSONException;
 import org.json.JSONObject;
 

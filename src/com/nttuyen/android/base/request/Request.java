@@ -2,6 +2,7 @@ package com.nttuyen.android.base.request;
 
 import java.util.Map;
 
+@Deprecated
 public interface Request {
     public static final int HTTP_GET = 1;
     public static final int HTTP_POST = 2;

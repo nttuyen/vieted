@@ -11,6 +11,7 @@ import org.json.JSONObject;
  * Time: 9:44 AM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class JsonUtils {
     public static boolean getReturnStatus(JSONObject jsonObject) {
         try {
@@ -28,7 +29,7 @@ public class JsonUtils {
 			return temp;
     		
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO: execute exception
 			return null;
 		}
     	
@@ -40,7 +41,7 @@ public class JsonUtils {
 			return temp;
     		
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO: execute exception
 			return null;
 		}
     	

@@ -118,7 +118,7 @@ public class ProfileActivity extends VietEdBaseActivity{
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO: execute exception
 		}
 	}
 

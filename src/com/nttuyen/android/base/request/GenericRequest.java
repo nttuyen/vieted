@@ -3,6 +3,7 @@ package com.nttuyen.android.base.request;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public abstract class GenericRequest implements Request {
     protected final int method;
     protected Map<String, String> params;

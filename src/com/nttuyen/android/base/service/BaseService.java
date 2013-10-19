@@ -4,6 +4,7 @@ import com.nttuyen.android.base.service.observer.ServiceObserver;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+@Deprecated
 public abstract class BaseService<Param, Result> implements Service<Param, Result> {
     protected Set<ServiceObserver> observers = new LinkedHashSet<ServiceObserver>();
 

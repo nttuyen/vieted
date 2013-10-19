@@ -9,6 +9,7 @@ import com.nttuyen.android.base.service.Service;
  * Time: 9:39 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public interface ServiceObserver {
     public void onReady(Service service);
     public void onChange(Service service);

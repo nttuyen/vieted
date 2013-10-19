@@ -26,12 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA.
- * User: nttuyen
- * Date: 5/21/13
- * Time: 1:24 PM
- * To change this template use File | Settings | File Templates.
+ * @author nttuyen266@gmail.com
  */
+@Deprecated
 public abstract class RestAsyncTask extends AsyncTask<Void, Void, JSONObject> {
     protected static final HttpClient httpClient;
 

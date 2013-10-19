@@ -10,6 +10,7 @@ import com.nttuyen.android.base.service.observer.ServiceObserver;
  * Time: 8:38 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class AsyncService<Param, Result> extends BaseService<Param, Result> {
     protected Param param;
     @Override

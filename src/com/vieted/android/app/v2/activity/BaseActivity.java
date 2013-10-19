@@ -1,0 +1,139 @@
+package com.vieted.android.app.v2.activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.LinearLayout;
+import com.nttuyen.android.base.Callback;
+import com.nttuyen.android.base.mvc.Events;
+import com.nttuyen.android.base.mvc.Model;
+import com.nttuyen.android.base.utils.UIContextHelper;
+import com.nttuyen.android.base.widget.ActionBar;
+import com.vieted.android.app.R;
+import com.vieted.android.app.v1.activity.HomeActivity;
+
+/**
+ * @author nttuyen266@gmail.com
+ */
+public abstract class BaseActivity extends FragmentActivity {
+	protected ActionBar actionBar;
+	protected LinearLayout bodyLayout;
+
+	protected final UIContextHelper contextHelper = new UIContextHelper(this);
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_global);
+
+		this.actionBar = (ActionBar)this.findViewById(R.id.actionbar);
+		this.actionBar.setTitle("Home");
+		bodyLayout = (LinearLayout) findViewById(R.id.bodyLayout);
+		this.setHomeNothingAction();
+		this.actionBar.addAction(new ActionBar.IntentAction(this, new Intent(this, HomeActivity.class), R.drawable.vieted_icon));
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+
+		final Model model = this.getModel();
+		if(model != null) {
+			//Show loading
+			Events.on(model, Events.ON_START_LOADING, new Callback() {
+				@Override
+				public void execute(Object... params) {
+					contextHelper.showLoading();
+				}
+			});
+
+			Events.on(model, Events.ON_READY, new Callback() {
+				@Override
+				public void execute(Object... params) {
+					contextHelper.dismissLoading();
+					initBodyView(params);
+				}
+			});
+			Events.on(model, Events.ON_HTTP_ERROR, new Callback() {
+				@Override
+				public void execute(Object... params) {
+					contextHelper.dismissLoading();
+					contextHelper.showErrDialog("HTTP ERROR", "Error while connect with server!");
+				}
+			});
+			Events.on(model, Events.ON_QUERY_ERROR, new Callback() {
+				@Override
+				public void execute(Object... params) {
+					contextHelper.dismissLoading();
+					contextHelper.showErrDialog("DATA ERROR", "ERROR while loading data from storage");
+				}
+			});
+
+			//TODO: should we call model.fetch() here
+			//We should let to concrete activity call it onStart()
+			model.fetch();
+		}
+	}
+
+	protected abstract Model getModel();
+	protected abstract void initBodyView(Object... params);
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(android.R.anim.slide_in_left,
+				android.R.anim.slide_out_right);
+	}
+
+	protected void setHomeNothingAction() {
+		this.actionBar.setHomeAction(new ActionBar.Action() {
+			@Override
+			public int getDrawable() {
+				return R.drawable.vieted_icon;
+			}
+			@Override
+			public void performAction(View view) {
+			}
+		});
+	}
+
+	protected void setHomeBackAction() {
+		this.actionBar.setHomeAction(new ActionBar.Action() {
+			@Override
+			public int getDrawable() {
+				return R.drawable.vieted_back_new;
+			}
+
+			@Override
+			public void performAction(View view) {
+				BaseActivity.this.onBackPressed();
+			}
+		});
+	}
+
+	protected void setTextHeader(String txtHeader) {
+		if (txtHeader != null)
+			this.actionBar.setTitle(txtHeader);
+	}
+
+	protected void setLayoutBody(int idBody) {
+		bodyLayout.removeAllViews();
+		bodyLayout.addView(getLayoutInflater().inflate(idBody, null));
+	}
+
+	protected void go(Class<? extends Activity> next) {
+		this.go(next, null);
+	}
+
+	protected void go(Class<? extends Activity> next, Bundle extra) {
+		Intent intent = new Intent(this, next);
+		if(extra != null) {
+			intent.putExtras(extra);
+		}
+		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right,
+				R.anim.slide_out_left);
+	}
+}
