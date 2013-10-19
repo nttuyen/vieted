@@ -9,17 +9,19 @@ import android.widget.LinearLayout;
 import com.nttuyen.android.base.Callback;
 import com.nttuyen.android.base.mvc.Events;
 import com.nttuyen.android.base.mvc.Model;
+import com.nttuyen.android.base.mvc.Presenter;
+import com.nttuyen.android.base.mvc.RestModel;
 import com.nttuyen.android.base.utils.UIContextHelper;
 import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
-import com.vieted.android.app.v1.activity.HomeActivity;
 
 /**
  * @author nttuyen266@gmail.com
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity implements Presenter {
 	protected ActionBar actionBar;
 	protected LinearLayout bodyLayout;
+	protected View bodyView;
 
 	protected final UIContextHelper contextHelper = new UIContextHelper(this);
 
@@ -33,6 +35,8 @@ public abstract class BaseActivity extends FragmentActivity {
 		bodyLayout = (LinearLayout) findViewById(R.id.bodyLayout);
 		this.setHomeNothingAction();
 		this.actionBar.addAction(new ActionBar.IntentAction(this, new Intent(this, HomeActivity.class), R.drawable.vieted_icon));
+
+		this.bodyView = null;
 	}
 
 	@Override
@@ -42,32 +46,49 @@ public abstract class BaseActivity extends FragmentActivity {
 		final Model model = this.getModel();
 		if(model != null) {
 			//Show loading
-			Events.on(model, Events.ON_START_LOADING, new Callback() {
+			Events.on(model, Model.ON_PROCESS_START, new Callback() {
 				@Override
 				public void execute(Object... params) {
-					contextHelper.showLoading();
+					//Model m = (Model)params[0];
+					//String process = (String)params[1];
+					//if(process == RestModel.PROCESS_HTTP_REQUEST) {
+						contextHelper.showLoading();
+					//}
 				}
 			});
 
-			Events.on(model, Events.ON_READY, new Callback() {
+			Events.on(model, Model.ON_PROCESS_COMPLETED, new Callback() {
 				@Override
 				public void execute(Object... params) {
-					contextHelper.dismissLoading();
-					initBodyView(params);
+					//Model m = (Model)params[0];
+					//String process = (String)params[1];
+					//if(process == RestModel.PROCESS_HTTP_REQUEST) {
+						contextHelper.dismissLoading();
+						//TODO: Should call onModelUpdate here or raise both ON_PROCESS_COMPLETED and ON_CHANGE event
+						onModelUpdate();
+						showBodyView();
+					//}
 				}
 			});
-			Events.on(model, Events.ON_HTTP_ERROR, new Callback() {
+			Events.on(model, Model.ON_CHANGE, new Callback() {
 				@Override
 				public void execute(Object... params) {
-					contextHelper.dismissLoading();
-					contextHelper.showErrDialog("HTTP ERROR", "Error while connect with server!");
+					onModelUpdate();
 				}
 			});
-			Events.on(model, Events.ON_QUERY_ERROR, new Callback() {
+
+			Events.on(model, Model.ON_PROCESS_ERROR, new Callback() {
 				@Override
 				public void execute(Object... params) {
-					contextHelper.dismissLoading();
-					contextHelper.showErrDialog("DATA ERROR", "ERROR while loading data from storage");
+					//Model m = (Model)params[0];
+					//String process = (String)params[1];
+					String errorType = (String)params[2];
+					String errorMessage = (String)params[3];
+
+					//if(process == RestModel.PROCESS_HTTP_REQUEST) {
+						contextHelper.dismissLoading();
+						contextHelper.showErrDialog(errorType, errorMessage);
+					//}
 				}
 			});
 
@@ -77,8 +98,27 @@ public abstract class BaseActivity extends FragmentActivity {
 		}
 	}
 
-	protected abstract Model getModel();
-	protected abstract void initBodyView(Object... params);
+	/**
+	 * Update view when model change
+	 */
+	protected void onModelUpdate() {
+		throw new UnsupportedOperationException();
+	}
+
+	protected void showBodyView() {
+		View view = this.getView();
+		if(view != null) {
+			this.bodyLayout.removeAllViews();
+			this.bodyLayout.addView(view);
+		} else {
+			throw new IllegalStateException("BodyView is not initialized");
+		}
+	}
+
+	@Override
+	public View getView() {
+		return this.bodyView;
+	}
 
 	@Override
 	public void onBackPressed() {
@@ -116,11 +156,6 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void setTextHeader(String txtHeader) {
 		if (txtHeader != null)
 			this.actionBar.setTitle(txtHeader);
-	}
-
-	protected void setLayoutBody(int idBody) {
-		bodyLayout.removeAllViews();
-		bodyLayout.addView(getLayoutInflater().inflate(idBody, null));
 	}
 
 	protected void go(Class<? extends Activity> next) {

@@ -1,5 +1,6 @@
 package com.nttuyen.android.base.mvc;
 
+import android.view.*;
 import com.nttuyen.android.base.Callback;
 
 import java.util.*;
@@ -8,6 +9,44 @@ import java.util.*;
  * @author nttuyen266@gmail.com
  */
 public abstract class Model {
+	/**
+	 * Param for this event:
+	 * params[0] = Model raise event
+	 * params[1] = Process name
+	 * params[.] = Custom param if need
+	 */
+	public static String ON_PROCESS_START = "eventOnProcessStart";
+	/**
+	 * Param for this event
+	 * 1 => Model raise event
+	 * 2 => Process name
+	 * 3 => progress value
+	 * . => custom param
+	 */
+	public static String ON_PROCESS_PROGRESS = "eventOnProcessProgress";
+	/**
+	 * Param for this event
+	 * 1 => Model raise event
+	 * 2 => Process name
+	 * . => custom param
+	 */
+	public static String ON_PROCESS_COMPLETED = "eventOnProcessCompleted";
+	/**
+	 * Param for this event:
+	 * 1 => Model raise event
+	 * 2 => Process name
+	 * 3 => error type
+	 * 4 => error message
+	 * . => custom params
+	 */
+	public static String ON_PROCESS_ERROR = "eventOnProcessError";
+	/**
+	 * Param for this event
+	 * 1 => Model raise event
+	 * . => Custom params
+	 */
+	public static String ON_CHANGE = "eventOnChange";
+
 	private Map<String, Set<Callback>> handlers = new HashMap<String, Set<Callback>>();
 
 	void register(String event, Callback callback) {
@@ -50,7 +89,34 @@ public abstract class Model {
 	public abstract void fetch();
 	public abstract void save();
 
-	public static abstract class Collection extends Model {
+	public static abstract class Collection<T extends Model> extends Model {
+		/**
+		 * Param for this event:
+		 * 1 => Model raise event
+		 * 2 => Child object
+		 * . => custom params
+		 */
+		public static final String ON_ADD = "onAdd";
+		/**
+		 * Param for this event
+		 * 1 => Model raise event
+		 * 2 => Child object
+		 * . => Custom params
+		 */
+		public static final String ON_REMOVE = "onRemove";
 
+		protected java.util.Collection<T> children = new LinkedList<T>();
+
+		public void add(T child) {
+			this.children.add(child);
+			trigger(ON_ADD, this, child);
+			trigger(ON_CHANGE, this);
+		}
+		public void remove(T child) {
+			if(this.children.remove(child)) {
+				trigger(ON_REMOVE, this, child);
+				trigger(ON_CHANGE, this);
+			}
+		}
 	}
 }

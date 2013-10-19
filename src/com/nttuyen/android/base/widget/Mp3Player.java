@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
-import com.androidteam.base.activity.UIContextHelper;
+import com.nttuyen.android.base.utils.UIContextHelper;
 import com.vieted.android.app.R;
 
 /**

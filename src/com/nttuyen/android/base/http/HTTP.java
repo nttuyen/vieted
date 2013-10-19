@@ -35,15 +35,6 @@ public class HTTP {
 	public static String ERROR_RESPONSE = "error_response";
 
 	static DefaultHttpClient client = null;
-	static {
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-			@Override
-			public void run() {
-
-			}
-		}));
-	}
-
 	static HttpClient createHttpClient() {
 		if(client == null) {
 			synchronized (HTTP.class) {

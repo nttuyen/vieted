@@ -22,16 +22,16 @@ public class VoidModel extends Model{
 
 			@Override
 			protected void onPostExecute(Void aVoid) {
-				trigger(Events.ON_READY, VoidModel.this);
+				trigger(ON_PROCESS_COMPLETED, VoidModel.this, "void");
 			}
 		};
 
-		this.trigger(Events.ON_START_LOADING, this);
+		this.trigger(ON_PROCESS_START, this, "void");
 		async.execute(null);
 		//End temporary block
 
 		//Code should be
-		//this.trigger(Events.ON_READY);
+		//this.trigger(ON_PROCESS_COMPLETED, this, "void");
 	}
 
 	@Override

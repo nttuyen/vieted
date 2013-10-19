@@ -18,6 +18,7 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		this.setTextHeader("VietEd");
 		this.actionBar.removeActionAt(0);
 		this.actionBar.addAction(new ActionBar.Action() {
@@ -30,35 +31,35 @@ public class HomeActivity extends BaseActivity {
 
 			}
 		}, 0);
-	}
 
-	@Override
-	protected Model getModel() {
-		return new VoidModel();
-	}
+		//Init body view
+		this.bodyView = getLayoutInflater().inflate(R.layout.activity_body_home, null);
 
-	protected void initBodyView(Object... params) {
-		this.setLayoutBody(R.layout.activity_body_home);
-		Button myCourseButton = (Button)findViewById(R.id.buttonMyCourse);
+		Button myCourseButton = (Button)this.bodyView.findViewById(R.id.buttonMyCourse);
 		myCourseButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				go(MyCourseActivity.class);
 			}
 		});
-		Button profileButton = (Button) findViewById(R.id.buttonProfile);
+		Button profileButton = (Button)this.bodyView.findViewById(R.id.buttonProfile);
 		profileButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				go(ProfileActivity.class);
 			}
 		});
-		Button listCourseButton = (Button) findViewById(R.id.buttonListCourse);
+		Button listCourseButton = (Button)this.bodyView.findViewById(R.id.buttonListCourse);
 		listCourseButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				go(ListCourseActivity.class);
 			}
 		});
+	}
+
+	@Override
+	public Model getModel() {
+		return new VoidModel();
 	}
 }
