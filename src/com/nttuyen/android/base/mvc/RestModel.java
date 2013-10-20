@@ -5,8 +5,12 @@ import com.nttuyen.android.base.async.Async;
 import com.nttuyen.android.base.converter.JsonConvertHelper;
 import com.nttuyen.android.base.http.HTTP;
 import com.nttuyen.android.base.http.JsonResponse;
+import com.nttuyen.android.base.http.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author nttuyen266@gmail.com
@@ -30,7 +34,15 @@ public abstract class RestModel extends Model {
 		}
 
 		response = new JsonResponse();
-		Async.httpGet(url, null, response, preAsync, postAsync, onHttpSuccess, onHttpFailure);
+
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put(Async.OPTION_TASK_NAME, PROCESS_HTTP_REQUEST);
+		options.put(Async.OPTION_ON_PRE_EXECUTE, preAsync);
+		//options.put(Async.OPTION_ON_POST_EXECUTE, postAsync);
+		options.put(HTTP.OPTION_SUCCESS, onHttpSuccess);
+		options.put(HTTP.OPTION_ERROR, onHttpFailure);
+
+		Async.http(url, options);
 	}
 
 	protected void fromJson(JSONObject json) {
@@ -38,8 +50,7 @@ public abstract class RestModel extends Model {
 			JsonConvertHelper.fromJson(json, this);
 			trigger(ON_PROCESS_COMPLETED, this, PROCESS_HTTP_REQUEST);
 		} catch (JSONException ex) {
-			trigger(ON_PROCESS_ERROR, RestModel.this, PROCESS_HTTP_REQUEST, HTTP.ERROR_EXCEPTION, "format error", ex);
-			return;
+			trigger(ON_PROCESS_ERROR, RestModel.this, PROCESS_HTTP_REQUEST, 409, "Conflict", "Response message is not as expected");
 		}
 	}
 
@@ -47,7 +58,8 @@ public abstract class RestModel extends Model {
 	final Callback preAsync = new Callback() {
 		@Override
 		public void execute(Object... params) {
-			trigger(ON_PROCESS_START, RestModel.this, PROCESS_HTTP_REQUEST);
+			String taskName = (String)params[0];
+			trigger(ON_PROCESS_START, RestModel.this, taskName);
 		}
 	};
 	//Post async execute
@@ -57,10 +69,6 @@ public abstract class RestModel extends Model {
 	final Callback onHttpSuccess = new Callback() {
 		@Override
 		public void execute(Object... params) {
-			if(response == null) {
-				trigger(ON_PROCESS_ERROR, RestModel.this, HTTP.ERROR_RESPONSE, 408, "empty response");
-				return;
-			}
 			fromJson(response.getResult());
 		}
 	};
@@ -69,23 +77,12 @@ public abstract class RestModel extends Model {
 	final Callback onHttpFailure = new Callback() {
 		@Override
 		public void execute(Object... params) {
-			String errorType = (String)params[0];
+			int code = (Integer)params[0];
+			String status = (String)params[1];
+			String message = (String)params[2];
+			Response response = (Response)params[3];
 
-			int trimArray = 1;
-			if(errorType == HTTP.ERROR_EXCEPTION) {
-				//RuntimeException exception = (RuntimeException)params[1];
-				trimArray = 2;
-			}
-
-			Object[] newParams;
-			int n = params.length - trimArray;
-			if(n > 0) {
-				newParams = new Object[n];
-				System.arraycopy(params, trimArray, newParams, 0, n);
-			} else {
-				newParams = new Object[0];
-			}
-			trigger(ON_PROCESS_ERROR, RestModel.this, PROCESS_HTTP_REQUEST, errorType, "error on http process", newParams);
+			trigger(ON_PROCESS_ERROR, RestModel.this, PROCESS_HTTP_REQUEST, code, status, message);
 		}
 	};
 }

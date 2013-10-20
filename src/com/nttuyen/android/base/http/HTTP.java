@@ -1,10 +1,7 @@
 package com.nttuyen.android.base.http;
 
 import com.nttuyen.android.base.Callback;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -18,21 +15,27 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author nttuyen266@gmail.com
  */
 public class HTTP {
+	public static String NAME = "HTTP_REQUEST";
+
 	public static String ERROR_EXCEPTION = "error_exception";
 	public static String ERROR_RESPONSE = "error_response";
+
+	public static String OPTION_URL = "url";
+	public static String OPTION_METHOD = "method";
+	public static String OPTION_DATA = "data";
+	public static String OPTION_RESPONSE = "response";
+	public static String OPTION_HEADERS = "headers";
+	public static String OPTION_COMPLETED = "completed";
+	public static String OPTION_ERROR = "error";
+	public static String OPTION_SUCCESS = "success";
 
 	static DefaultHttpClient client = null;
 	static HttpClient createHttpClient() {
@@ -54,137 +57,200 @@ public class HTTP {
 		return client;
 	}
 
-	public static void get(String url, Map<String, String> data, Response response, Callback onSuccess, Callback onFailure) {
-		execute("GET", url, data, response, onSuccess, onFailure);
+	public static <D> void execute(String url, D data, Map<String, Object> options) {
+		if(options == null) {
+			options = new HashMap<String, Object>();
+		}
+		options.put(OPTION_DATA, data);
+		execute(url, options);
 	}
-	public static <D> void post(String url, D data, Response response, Callback onSuccess, Callback onFailure) {
-		execute("POST", url, data, response, onSuccess, onFailure);
-	}
-	public static <D> void put(String url, D data, Response response, Callback onSuccess, Callback onFailure) {
-		handError(onFailure, ERROR_EXCEPTION, new UnsupportedOperationException());
+	public static void execute(String url, Map<String, Object> options) {
+		if(options == null) {
+			options = new HashMap<String, Object>();
+		}
+		options.put(OPTION_URL, url);
+		execute(options);
 	}
 
-	static <D> void execute(String method, String url, D data, Response response, Callback onSuccess, Callback onFailure) {
-		if(method == null || url == null) {
-			handError(onFailure, ERROR_EXCEPTION, new IllegalArgumentException("Method and URL must not null"));
+	/**
+	 * Option is Map that has: <br/>
+	 * OPTION_URL => String
+	 * OPTION_METHOD => String - http method
+	 * OPTION_DATA => Object (any type of data)
+	 * OPTION_RESPONSE => Response => response object
+	 * OPTION_HEADERS => Map<String, String> - header
+	 * OPTION_COMPLETED => Callback - callback of error
+	 * OPTION_ERROR => Callback - callback when execute completed
+	 * OPTION_SUCCESS => Callback - callback with response code is 200
+	 * HTTP_RESPONSE_CODE => Callback - callback of response code
+	 *
+	 * All callback will execute with param: statusCode, statusString, message, response
+	 * @param options
+	 */
+	public static void execute(Map<String, Object> options) {
+		if(options == null
+				|| !options.containsKey(OPTION_URL)
+				|| !(options.get(OPTION_URL) instanceof String)) {
+			//throw new IllegalArgumentException("Argument is not valid");
+			//This mean: 412 Precondition Failed
+			//Response will null
+			handleCallback(412, "Precondition Failed", "options argument is not valid", null, options);
 		}
 
-		HttpRequestBase request = createRequest(method, url, data);
+		String url = (String)options.get(OPTION_URL);
 
-		if(request == null) {
-			handError(onFailure, ERROR_EXCEPTION, new UnsupportedOperationException("Method: " + method + " is not supported now"));
+		String method = "GET";
+		if(options.containsKey(OPTION_METHOD) && options.get(OPTION_METHOD) instanceof String) {
+			method = (String)options.get(OPTION_METHOD);
+		}
+		method = method.toUpperCase();
+
+		HttpRequestBase request = null;
+		try {
+			if("GET".equals(method)) {
+				request = createHttpGet(url, options);
+			} else if("POST".equals(method)) {
+				request = createHttpPost(url, options);
+			} else {
+				//This is mean not supported: 412 Precondition Failed
+				handleCallback(412, "Precondition Failed", "Method " + method + "is not supported now", null, options);
+			}
+		} catch (Exception e) {
+			handleCallback(412, "Precondition Failed", "Can not create HttpRequest because exception: " + e.getMessage(), null, options);
+			return;
 		}
 
-		execute(request, response, onSuccess, onFailure);
-	}
-
-	static void execute(HttpRequestBase request, Response response, Callback onSuccess, Callback onFailure) {
 		InputStream result = null;
 		try {
 			HttpClient client = createHttpClient();
+
 			HttpResponse res = client.execute(request);
-			int code = res.getStatusLine().getStatusCode();
-			if(code == 200) {
+
+			StatusLine status = res.getStatusLine();
+			int statusCode = status.getStatusCode();
+			String statusString = status.getReasonPhrase();
+
+			//TODO: we should hand all 2xx code as successs
+			Response response = null;
+			if(statusCode == 200) {
 				HttpEntity entity = res.getEntity();
 				result = entity.getContent();
-				response.parse(result);
-				//Success
-				if(onSuccess != null) {
-					onSuccess.execute();
-				}
-			} else {
-				if(onFailure != null) {
-					handError(onFailure, ERROR_RESPONSE, null, code);
+
+				//Process response:
+				if(options.containsKey(OPTION_RESPONSE) && options.get(OPTION_RESPONSE) instanceof Response) {
+					response = (Response)options.get(OPTION_RESPONSE);
+					if(response != null) {
+						response.parse(result);
+					}
 				}
 			}
+			handleCallback(statusCode, statusString, "completed", response, options);
 		} catch (Exception ex) {
-			if(onFailure != null) {
-				onFailure.execute(ERROR_EXCEPTION, ex);
-			}
+			handleCallback(500, "Internal Server Error", "Unknown error when execute http", null, options);
 		} finally {
 			if(result != null) {
 				try {
 					result.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				} catch (IOException e) {}
 			}
 		}
 	}
-	static <D> HttpRequestBase createRequest(String method, String url, D data) {
-		HttpRequestBase request = null;
-		if("GET".equalsIgnoreCase(method)) {
-			Map<String, String> map = (Map<String, String>)data;
-			request = createGetRequest(url, map);
-		} else if("POST".equalsIgnoreCase(method)) {
-			request = createPostRequest(url, data);
+
+	private static void handleCallback(int status, String statusString, String message, Response response, Map<String, Object> options) {
+		if(response == null) {
+			if(options.containsKey(OPTION_RESPONSE) && options.get(OPTION_RESPONSE) instanceof Response) {
+				response = (Response)options.get(OPTION_RESPONSE);
+			}
 		}
-		return request;
-	}
-	static HttpGet createGetRequest(String url, Map<String, String> data) {
-		if(url == null) {
-			throw new IllegalArgumentException("url must not null");
+		//By status
+		if(options.containsKey(String.valueOf(status)) && options.get(String.valueOf(status)) instanceof Callback) {
+			Callback statusCallback = (Callback)options.get(String.valueOf(status));
+			statusCallback.execute(status, statusString, message, response);
+		}
+		//Completed
+		if(options.containsKey(OPTION_COMPLETED) && options.get(OPTION_COMPLETED) instanceof Callback) {
+			Callback completedCallback = (Callback)options.get(OPTION_COMPLETED);
+			completedCallback.execute(status, statusString, message, response);
 		}
 
+		//Error: 4xx and 5xx
+		if(status >= 400 && status < 600) {
+			if(options.containsKey(OPTION_ERROR) && options.get(OPTION_ERROR) instanceof Callback) {
+				Callback errorCallback = (Callback)options.get(OPTION_ERROR);
+				errorCallback.execute(status, statusString, message, response);
+			}
+		}
+
+		//Success
+		if(status >= 200 && status < 300) {
+			if(options.containsKey(OPTION_SUCCESS) && options.get(OPTION_SUCCESS) instanceof Callback) {
+				Callback success = (Callback)options.get(OPTION_SUCCESS);
+				success.execute(status, statusString, message, response);
+			}
+		}
+	}
+
+	public static HttpGet createHttpGet(String url, Map<String, Object> options) {
 		StringBuilder builder = new StringBuilder(url);
 
-		if(data != null && !data.isEmpty()) {
+		if(options.containsKey(OPTION_DATA)) {
+			Object data = options.get(OPTION_DATA);
+
 			if(builder.indexOf("?") != -1) {
 				builder.append('?');
-			} else {
-				builder.append('&');
 			}
-			for(Map.Entry<String, String> entry : data.entrySet()) {
-				builder.append(entry.getKey())
-						.append('=')
-						.append(entry.getValue())
-						.append('&');
+
+			if(data instanceof String) {
+				String value = (String)data;
+				builder.append("data=").append(value).append('&');
+			} else if(data instanceof Map) {
+				Map map = (Map)data;
+				Set<Map.Entry> entries = map.entrySet();
+				for(Map.Entry entry : entries) {
+					if(entry.getKey() instanceof String) {
+						builder.append(entry.getKey())
+								.append('=')
+								.append(String.valueOf(entry.getValue()))
+								.append('&');
+					}
+				}
 			}
+
 			builder.deleteCharAt(builder.length() - 1);
 		}
 
 		HttpGet get = new HttpGet(builder.toString());
 		return get;
 	}
-	static <T> HttpPost createPostRequest(String url, T data) {
-		if(url == null) {
-			throw new IllegalArgumentException("URL must be not null");
-		}
 
-		HttpEntity entity = null;
+	public static HttpPost createHttpPost(String url, Map<String, Object> options) throws Exception {
 		//Post form
-		if(data != null) {
+		HttpEntity entity = null;
+		if(options.containsKey(OPTION_DATA)) {
+			Object data = options.get(OPTION_DATA);
+
+			//Form data
 			if(data instanceof Map) {
 				Map map = (Map)data;
-				List<NameValuePair> values = new LinkedList<NameValuePair>();
+				List<NameValuePair> forms = new LinkedList<NameValuePair>();
+
 				Set<Map.Entry> entries = map.entrySet();
 				for(Map.Entry entry : entries) {
-					NameValuePair pair = new BasicNameValuePair((String)entry.getKey(), (String)entry.getValue());
-					values.add(pair);
+					if(entry.getKey() instanceof String) {
+						NameValuePair pair = new BasicNameValuePair((String)entry.getKey(), String.valueOf(entry.getValue()));
+						forms.add(pair);
+					}
 				}
-				try {
-					entity = new UrlEncodedFormEntity(values, org.apache.http.protocol.HTTP.UTF_8);
-				} catch (UnsupportedEncodingException ex) {
-					ex.printStackTrace();
-					throw new IllegalArgumentException("not support utf-8", ex);
+				if(!forms.isEmpty()) {
+					entity = new UrlEncodedFormEntity(forms, org.apache.http.protocol.HTTP.UTF_8);
 				}
 			} else if(data instanceof byte[]) {
-				byte[] bytes = (byte[])data;
-				entity = new ByteArrayEntity(bytes);
-			} else if(data instanceof String) {
-				String s = (String)data;
-				try {
-					entity = new StringEntity(s, org.apache.http.protocol.HTTP.UTF_8);
-				} catch (UnsupportedEncodingException ex) {
-					ex.printStackTrace();
-					throw new IllegalArgumentException("not support utf-8", ex);
-				}
+				entity = new ByteArrayEntity((byte[])data);
 			} else if(data instanceof HttpEntity) {
 				entity = (HttpEntity)data;
-			}
-
-			if(entity == null) {
-				throw new IllegalArgumentException("Unsupported this data");
+			} else {
+				//Call to string value
+				entity = new StringEntity(String.valueOf(data), org.apache.http.protocol.HTTP.UTF_8);
 			}
 		}
 
@@ -194,18 +260,5 @@ public class HTTP {
 		}
 
 		return post;
-	}
-
-	static void handError(Callback callback, String type, RuntimeException exception, Object... params) {
-		if(exception != null) {
-			if(callback != null) {
-				callback.execute(type, exception, params);
-			}
-			throw exception;
-		} else {
-			if(callback != null) {
-				callback.execute(type, params);
-			}
-		}
 	}
 }

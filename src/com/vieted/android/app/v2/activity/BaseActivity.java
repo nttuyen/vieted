@@ -10,7 +10,6 @@ import com.nttuyen.android.base.Callback;
 import com.nttuyen.android.base.mvc.Events;
 import com.nttuyen.android.base.mvc.Model;
 import com.nttuyen.android.base.mvc.Presenter;
-import com.nttuyen.android.base.mvc.RestModel;
 import com.nttuyen.android.base.utils.UIContextHelper;
 import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
@@ -51,9 +50,7 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 				public void execute(Object... params) {
 					//Model m = (Model)params[0];
 					//String process = (String)params[1];
-					//if(process == RestModel.PROCESS_HTTP_REQUEST) {
-						contextHelper.showLoading();
-					//}
+					contextHelper.showLoading();
 				}
 			});
 
@@ -62,12 +59,11 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 				public void execute(Object... params) {
 					//Model m = (Model)params[0];
 					//String process = (String)params[1];
-					//if(process == RestModel.PROCESS_HTTP_REQUEST) {
-						contextHelper.dismissLoading();
-						//TODO: Should call onModelUpdate here or raise both ON_PROCESS_COMPLETED and ON_CHANGE event
-						onModelUpdate();
-						showBodyView();
-					//}
+					contextHelper.dismissLoading();
+
+					//TODO: Should call onModelUpdate here or raise both ON_PROCESS_COMPLETED and ON_CHANGE event
+					onModelUpdate();
+					showBodyView();
 				}
 			});
 			Events.on(model, Model.ON_CHANGE, new Callback() {
@@ -82,13 +78,12 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 				public void execute(Object... params) {
 					//Model m = (Model)params[0];
 					//String process = (String)params[1];
-					String errorType = (String)params[2];
-					String errorMessage = (String)params[3];
+					//int errorCode = (Integer)params[2];
+					String errorString = (String)params[3];
+					String errorMessage = (String)params[4];
 
-					//if(process == RestModel.PROCESS_HTTP_REQUEST) {
-						contextHelper.dismissLoading();
-						contextHelper.showErrDialog(errorType, errorMessage);
-					//}
+					contextHelper.dismissLoading();
+					contextHelper.showErrDialog(errorString, errorMessage);
 				}
 			});
 
@@ -102,7 +97,6 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 	 * Update view when model change
 	 */
 	protected void onModelUpdate() {
-		throw new UnsupportedOperationException();
 	}
 
 	protected void showBodyView() {
@@ -111,7 +105,7 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 			this.bodyLayout.removeAllViews();
 			this.bodyLayout.addView(view);
 		} else {
-			throw new IllegalStateException("BodyView is not initialized");
+			contextHelper.showErrDialog("Error", "BodyView is not initialized");
 		}
 	}
 
