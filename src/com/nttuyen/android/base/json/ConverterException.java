@@ -1,11 +1,7 @@
-package com.nttuyen.android.base.converter;
+package com.nttuyen.android.base.json;
 
 /**
- * Created with IntelliJ IDEA.
- * User: nttuyen
- * Date: 7/2/13
- * Time: 9:55 PM
- * To change this template use File | Settings | File Templates.
+ * @author nttuyen266@gmail.com
  */
 public class ConverterException extends Exception {
     public ConverterException() {

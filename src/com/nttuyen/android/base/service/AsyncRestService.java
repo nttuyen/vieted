@@ -1,6 +1,6 @@
 package com.nttuyen.android.base.service;
 
-import com.nttuyen.android.base.converter.JsonConvertHelper;
+import com.nttuyen.android.base.json.JsonConvertHelper;
 import com.nttuyen.android.base.request.Request;
 import com.nttuyen.android.base.request.RequestHelper;
 import org.apache.http.client.HttpClient;

@@ -1,6 +1,6 @@
 package com.vieted.android.app.v1.dto;
 
-import com.nttuyen.android.base.converter.Json;
+import com.nttuyen.android.base.json.Json;
 
 import java.io.Serializable;
 import java.util.List;

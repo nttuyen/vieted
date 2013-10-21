@@ -2,7 +2,7 @@ package com.nttuyen.android.base.mvc;
 
 import com.nttuyen.android.base.Callback;
 import com.nttuyen.android.base.async.Async;
-import com.nttuyen.android.base.converter.JsonConvertHelper;
+import com.nttuyen.android.base.json.JsonConvertHelper;
 import com.nttuyen.android.base.http.HTTP;
 import com.nttuyen.android.base.http.JsonResponse;
 import com.nttuyen.android.base.http.Response;
@@ -47,7 +47,7 @@ public abstract class RestModel extends Model {
 
 	protected void fromJson(JSONObject json) {
 		try {
-			JsonConvertHelper.fromJson(json, this);
+			JsonConvertHelper.inject(json, this);
 			trigger(ON_PROCESS_COMPLETED, this, PROCESS_HTTP_REQUEST);
 		} catch (JSONException ex) {
 			trigger(ON_PROCESS_ERROR, RestModel.this, PROCESS_HTTP_REQUEST, 409, "Conflict", "Response message is not as expected");

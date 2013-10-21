@@ -1,4 +1,4 @@
-package com.nttuyen.android.base.converter;
+package com.nttuyen.android.base.json;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,11 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created with IntelliJ IDEA.
- * User: nttuyen
- * Date: 7/2/13
- * Time: 9:44 PM
- * To change this template use File | Settings | File Templates.
+ * @author nttuyen266@gmail.com
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

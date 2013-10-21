@@ -11,20 +11,16 @@ public class StringResponse extends Response<String> {
 	String result = null;
 
 	@Override
-	public void parse(InputStream input) {
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-			StringBuilder builder = new StringBuilder();
+	public void parse(InputStream input) throws Exception {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+		StringBuilder builder = new StringBuilder();
 
-			String line = null;
-			while((line = reader.readLine()) != null) {
-				builder.append(line);
-			}
-
-			this.result = builder.toString();
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		String line = null;
+		while((line = reader.readLine()) != null) {
+			builder.append(line);
 		}
+
+		this.result = builder.toString();
 	}
 
 	public String getResult() {
