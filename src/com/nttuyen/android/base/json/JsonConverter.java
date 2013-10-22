@@ -4,23 +4,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * @author nttuyen266@gmail.com
  */
 public abstract class JsonConverter {
-	/**
-	 * Inject to object
-	 * @param json
-	 * @param value
-	 * @param <T>
-	 * @throws JSONException
-	 */
-	public abstract <T> void inject(JSONObject json, T value) throws JSONException;
-	public <T> void inject(JSONArray json, Class<T> type, Collection<T> collections) throws JSONException {
+	public abstract <T> T inject(JSONObject json, T target) throws Exception;
+	public <T> Collection<T> inject(JSONArray json, Class<T> type, Collection<T> collections) throws Exception {
 		if(collections == null || type == null || json == null) {
-			return;
+			return collections;
 		}
 		try {
 			int size = json.length();
@@ -37,6 +31,15 @@ public abstract class JsonConverter {
 		} catch (Exception ex) {
 
 		}
+		return collections;
+	}
+	public <T> T convert(JSONObject json, Class<T> type) throws Exception {
+		T target = type.newInstance();
+		return this.inject(json, target);
+	}
+	public <T> Collection<T> convert(JSONArray json, Class<T> type) throws Exception {
+		Collection<T> collection = new ArrayList<T>();
+		return this.inject(json, type, collection);
 	}
 
     protected  <T> T getValueInJsonArray(JSONArray jsonArray, int index, Class<T> type) throws JSONException {
@@ -57,7 +60,6 @@ public abstract class JsonConverter {
         }
         return null;
     }
-
     protected boolean isPrimaryType(Class type) {
         return Boolean.TYPE.equals(type)
                 || Double.TYPE.equals(type)

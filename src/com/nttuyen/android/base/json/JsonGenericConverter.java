@@ -13,9 +13,9 @@ public class JsonGenericConverter extends JsonConverter {
         JsonConvertHelper.register(JsonGenericConverter.class.getName(), new JsonGenericConverter());
     }
 
-	public <T> void inject(JSONObject json, T value) throws JSONException {
+	public <T> T inject(JSONObject json, T target) throws JSONException {
 		try {
-			Class<?> type = value.getClass();
+			Class<?> type = target.getClass();
 
 			Field[] fields = type.getDeclaredFields();
 			for(Field field : fields) {
@@ -37,14 +37,18 @@ public class JsonGenericConverter extends JsonConverter {
 
 				Object fieldValue = null;
 				if(annotation!= null && annotation.isCollection()) {
-					//TODO: only support for ListType
+					//TODO: only support for Collection: List, Set interface and concrete type;
 					Collection collection = null;
 					if(fieldType.equals(Collection.class) || fieldType.equals(List.class)) {
 						collection = new ArrayList();
 					} else if(fieldType.equals(Set.class)) {
 						collection = new HashSet();
 					} else {
-						continue;
+						try {
+							collection = (Collection)fieldType.newInstance();
+						} catch (Exception ex) {
+							continue;
+						}
 					}
 
 					Class<?> typeInList = annotation.type();
@@ -67,10 +71,12 @@ public class JsonGenericConverter extends JsonConverter {
 
 				//setField(value, field, jsonField, json);
 				if(fieldValue != null) {
-					setter.invoke(value, fieldValue);
+					setter.invoke(target, fieldValue);
 				}
 
 			}
+
+			return target;
 
 		} catch (Exception e) {
 			JSONException ex = new JSONException("exception");

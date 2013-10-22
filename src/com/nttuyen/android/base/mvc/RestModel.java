@@ -49,7 +49,7 @@ public abstract class RestModel extends Model {
 		try {
 			JsonConvertHelper.inject(json, this);
 			trigger(ON_PROCESS_COMPLETED, this, PROCESS_HTTP_REQUEST);
-		} catch (JSONException ex) {
+		} catch (Exception ex) {
 			trigger(ON_PROCESS_ERROR, RestModel.this, PROCESS_HTTP_REQUEST, 409, "Conflict", "Response message is not as expected");
 		}
 	}

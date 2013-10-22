@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,25 +25,34 @@ public class JsonConvertHelper {
         converters.put(name, converter);
     }
 
-	public static <T> void inject(JSONObject json, T value) throws JSONException {
-		Class<?> type = value.getClass();
+	public static <T> T inject(JSONObject json, T target) throws Exception {
+		Class<?> type = target.getClass();
 		JsonConverter converter = converters.get(type.getName());
 		if(converter == null) {
 			converter = converters.get(JsonGenericConverter.class.getName());
 		}
 		if(converter == null)
-			return;
+			return target;
 
-		converter.inject(json, value);
+		converter.inject(json, target);
+		return target;
 	}
-	public static <T> void inject(JSONArray json, Class<T> type, Collection<T> collection) throws JSONException {
+	public static <T> T convert(JSONObject json, Class<T> type) throws Exception {
+		T target = type.newInstance();
+		return inject(json, target);
+	}
+	public static <T> Collection<T> inject(JSONArray json, Class<T> type, Collection<T> collection) throws Exception {
 		JsonConverter converter = converters.get(type.getName());
 		if(converter == null) {
 			converter = converters.get(JsonGenericConverter.class.getName());
 		}
 		if(converter == null)
-			return;
+			return collection;
 
-		converter.inject(json, type, collection);
+		return converter.inject(json, type, collection);
+	}
+	public static <T> Collection<T> convert(JSONArray json, Class<T> type) throws Exception {
+		Collection<T> collection = new ArrayList<T>();
+		return inject(json, type, collection);
 	}
 }

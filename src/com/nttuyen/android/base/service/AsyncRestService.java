@@ -83,7 +83,7 @@ public abstract class AsyncRestService<Result> extends AsyncService<Request, Res
                 //Return object
                 JSONObject jsonObject = json.getJSONObject(jsonDataField);
                 this.result = (Result)JsonConvertHelper.convert(jsonObject, this.type);
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 //Return Collection
                 //TODO: only support List type
                 JSONArray jsonArray = json.getJSONArray(jsonDataField);
@@ -93,7 +93,7 @@ public abstract class AsyncRestService<Result> extends AsyncService<Request, Res
             return this.result;
         } catch (IOException e) {
             AsyncRestService.this.exception = new ServiceException("Error on execution request", e);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             AsyncRestService.this.exception = new ServiceException("Data format error!", e);
         }
 
