@@ -37,7 +37,6 @@ public class ProfileActivity extends VietEdBaseActivity{
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		 this.setTextHeader("VietEd");
 	        this.actionBar.removeActionAt(0);
@@ -74,7 +73,6 @@ public class ProfileActivity extends VietEdBaseActivity{
 
 					@Override
 					public boolean onLongClick(View v) {
-						// TODO Auto-generated method stub
 						System.out.println(path);
 						return false;
 					}
@@ -119,7 +117,6 @@ public class ProfileActivity extends VietEdBaseActivity{
 			}
 
 		} catch (Exception e) {
-			// TODO: execute exception
 		}
 	}
 
@@ -185,7 +182,6 @@ public class ProfileActivity extends VietEdBaseActivity{
 
 	@Override
 	protected void handleGetSuccess(RestAsyncTask task) {
-		// TODO Auto-generated method stub
 		 if(task == this.mainTask) {
 	            this.initBoby();
 	        }

@@ -26,7 +26,6 @@ public class RegisterActivity extends VietEdBaseActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setTextHeader("Register");
 		this.setLayoutBody(R.layout.activity_register_account);
@@ -45,7 +44,6 @@ public class RegisterActivity extends VietEdBaseActivity {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				// TODO Auto-generated method stub
 				if (isChecked == false) {
 					txtPassword
 							.setTransformationMethod(new PasswordTransformationMethod());
@@ -60,7 +58,6 @@ public class RegisterActivity extends VietEdBaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String username = txtUsername.getText().toString().trim();
 				String password = txtPassword.getText().toString().trim();
 				String passwordRe = txtPasswordRe.getText().toString().trim();
@@ -90,7 +87,6 @@ public class RegisterActivity extends VietEdBaseActivity {
 
 	@Override
 	protected void handleGetSuccess(RestAsyncTask task) {
-		// TODO Auto-generated method stub
 		if (task == this.regisTask) {
 			/*Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
 			startActivity(intent);

@@ -31,7 +31,6 @@ public class ListUnitActivity extends VietEdBaseActivity {
     private Service<Map<String, String>, Course> courseDetailService;
 
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         this.setTextHeader("List Unit");
         this.setHomeBackAction();

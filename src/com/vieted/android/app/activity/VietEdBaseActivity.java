@@ -46,7 +46,6 @@ public abstract class VietEdBaseActivity extends BaseActivity<RestAsyncTask> {
 
 			@Override
 			public void performAction(View view) {
-				// TODO: nothing
 			}
 		});
 	}

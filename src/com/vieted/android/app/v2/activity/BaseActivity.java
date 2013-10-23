@@ -7,12 +7,17 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.nttuyen.android.base.Callback;
+import com.nttuyen.android.base.mvc.EventListener;
 import com.nttuyen.android.base.mvc.Events;
 import com.nttuyen.android.base.mvc.Model;
 import com.nttuyen.android.base.mvc.Presenter;
 import com.nttuyen.android.base.utils.UIContextHelper;
 import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
+
+import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author nttuyen266@gmail.com
@@ -44,59 +49,13 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 
 		final Model model = this.getModel();
 		if(model != null) {
-			//Show loading
-			Events.on(model, Model.ON_PROCESS_START, new Callback() {
-				@Override
-				public void execute(Object... params) {
-					//Model m = (Model)params[0];
-					//String process = (String)params[1];
-					contextHelper.showLoading();
-				}
-			});
-
-			Events.on(model, Model.ON_PROCESS_COMPLETED, new Callback() {
-				@Override
-				public void execute(Object... params) {
-					//Model m = (Model)params[0];
-					//String process = (String)params[1];
-					contextHelper.dismissLoading();
-
-					//TODO: Should call onModelUpdate here or raise both ON_PROCESS_COMPLETED and ON_CHANGE event
-					onModelUpdate();
-					showBodyView();
-				}
-			});
-			Events.on(model, Model.ON_CHANGE, new Callback() {
-				@Override
-				public void execute(Object... params) {
-					onModelUpdate();
-				}
-			});
-
-			Events.on(model, Model.ON_PROCESS_ERROR, new Callback() {
-				@Override
-				public void execute(Object... params) {
-					//Model m = (Model)params[0];
-					//String process = (String)params[1];
-					//int errorCode = (Integer)params[2];
-					String errorString = (String)params[3];
-					String errorMessage = (String)params[4];
-
-					contextHelper.dismissLoading();
-					contextHelper.showErrDialog(errorString, errorMessage);
-				}
-			});
+			//Register all event listener
+			this.registerEventListener();
 
 			//TODO: should we call model.fetch() here
 			//We should let to concrete activity call it onStart()
 			model.fetch();
 		}
-	}
-
-	/**
-	 * Update view when model change
-	 */
-	protected void onModelUpdate() {
 	}
 
 	protected void showBodyView() {
@@ -164,5 +123,70 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in_right,
 				R.anim.slide_out_left);
+	}
+
+
+	//Event
+	/**
+	 * Update view when model change
+	 */
+	@EventListener(event = Model.ON_CHANGE)
+	public void onModelUpdate() {
+
+	}
+	@EventListener(event = Model.ON_PROCESS_START)
+	public void onProcessStart() {
+		contextHelper.showLoading();
+	}
+	@EventListener(event = Model.ON_PROCESS_COMPLETED)
+	public void onProcessComplete() {
+		contextHelper.dismissLoading();
+		onModelUpdate();
+		showBodyView();
+	}
+	@EventListener(event = Model.ON_PROCESS_ERROR)
+	public void onProcessError(Model m, String process, int errorCode, String errorString, String errorMessage) {
+		contextHelper.dismissLoading();
+		contextHelper.showErrDialog(errorString, errorMessage);
+	}
+
+	protected void on(String event, String method) {
+		Model model = this.getModel();
+		if(model != null) {
+			Events.on(model, event, method, this);
+		}
+	}
+	protected void registerEventListener() {
+		Model model = this.getModel();
+		if(model == null) {
+			return;
+		}
+
+		//Clean all old eventListener
+		Events.off(model);
+
+		//All method declared at current class is high priority
+		Method[] methods = this.getClass().getDeclaredMethods();
+		Set<String> registered = new HashSet<String>();
+		for(Method method : methods) {
+			EventListener eventListener = method.getAnnotation(EventListener.class);
+			if(eventListener != null && eventListener.event() != null && !"".equals(eventListener.event())) {
+				String event = eventListener.event();
+				Events.on(model, event, method, this);
+				registered.add(event);
+			}
+		}
+
+		//All public method should be load but do not override
+		methods = this.getClass().getMethods();
+		for(Method method : methods) {
+			EventListener eventListener = method.getAnnotation(EventListener.class);
+			if(eventListener != null && eventListener.event() != null && !"".equals(eventListener.event())) {
+				String event = eventListener.event();
+				if(!registered.contains(event)) {
+					Events.on(model, event, method, this);
+				}
+			}
+		}
 	}
 }

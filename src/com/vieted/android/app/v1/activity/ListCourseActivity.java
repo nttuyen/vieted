@@ -26,7 +26,6 @@ public class ListCourseActivity extends VietEdBaseActivity {
     private Service<Map<String, String>, Course> listCourseService;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         this.setTextHeader("List Course");
         this.setHomeBackAction();

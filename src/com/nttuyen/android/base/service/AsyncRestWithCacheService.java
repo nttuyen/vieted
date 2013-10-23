@@ -113,7 +113,6 @@ public abstract class AsyncRestWithCacheService<Param, Result> extends BaseServi
 
     @Override
     public void onReady(Service service) {
-        //TODO: not need
 //        if(service == this.fetchFromCacheService) {
 //            for(ServiceObserver observer : this.observers) {
 //                observer.onReady(this);

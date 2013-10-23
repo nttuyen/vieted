@@ -14,7 +14,6 @@ public interface ServiceObserver {
     public void onReady(Service service);
     public void onChange(Service service);
 
-    //TODO: this method
     public void onInit(Service service);
     public void onStart(Service service);
     public void onCancel(Service service);

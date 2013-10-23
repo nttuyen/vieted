@@ -29,25 +29,21 @@ public class RatingAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return objList.size();
 	}
 
 	@Override
 	public BaseObject getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return objList.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		View vi = convertView;
 		if (convertView== null) 
 			vi= mLayoutInflater.inflate(R.layout.item_row_rating_bar,null);

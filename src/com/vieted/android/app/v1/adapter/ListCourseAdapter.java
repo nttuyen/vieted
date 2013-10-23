@@ -29,7 +29,6 @@ public class ListCourseAdapter extends VietEdListBaseAdapter<Course>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         View vi = convertView;
         if (convertView== null)
             vi= mLayoutInflater.inflate(R.layout.item_list_course,null);

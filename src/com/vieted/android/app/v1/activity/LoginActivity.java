@@ -26,7 +26,6 @@ public class LoginActivity extends VietEdBaseActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO: We should start service at onStart method
         ServicesHelpers.startService(new CheckHasLoggedInService(), this, new Handler<LoggedInfo>() {
             @Override
             public void handle(LoggedInfo logged) {

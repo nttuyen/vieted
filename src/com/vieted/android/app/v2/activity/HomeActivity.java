@@ -15,6 +15,8 @@ import com.vieted.android.app.v2.model.VoidModel;
  * @author nttuyen266@gmail.com
  */
 public class HomeActivity extends BaseActivity {
+	private Model model = null;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,6 +62,9 @@ public class HomeActivity extends BaseActivity {
 
 	@Override
 	public Model getModel() {
-		return new VoidModel();
+		if(this.model == null) {
+			this.model = new VoidModel();
+		}
+		return this.model;
 	}
 }

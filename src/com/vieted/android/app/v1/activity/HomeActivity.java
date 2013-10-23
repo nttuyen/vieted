@@ -46,7 +46,7 @@ public class HomeActivity extends VietEdBaseActivity {
 
     @Override
     public void onBackPressed() {
-        //TODO: nothing
+
     }
 
     private void initBodyView() {

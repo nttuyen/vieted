@@ -13,43 +13,40 @@ public abstract class Model {
 	 * Param for this event:
 	 * params[0] = Model raise event
 	 * params[1] = Process name
-	 * params[.] = Custom param if need
 	 */
-	public static String ON_PROCESS_START = "eventOnProcessStart";
+	public static final String ON_PROCESS_START = "eventOnProcessStart";
 	/**
 	 * Param for this event
 	 * 1 => Model raise event
 	 * 2 => Process name
 	 * 3 => progress value
-	 * . => custom param
 	 */
-	public static String ON_PROCESS_PROGRESS = "eventOnProcessProgress";
+	public static final String ON_PROCESS_PROGRESS = "eventOnProcessProgress";
 	/**
 	 * Param for this event
 	 * 1 => Model raise event
 	 * 2 => Process name
-	 * . => custom param
 	 */
-	public static String ON_PROCESS_COMPLETED = "eventOnProcessCompleted";
+	public static final String ON_PROCESS_COMPLETED = "eventOnProcessCompleted";
 	/**
 	 * Param for this event:
 	 * 1 => Model raise event
 	 * 2 => Process name
 	 * 3 => error type
 	 * 4 => error message
-	 * . => custom params
+	 * 5 => exception
 	 */
-	public static String ON_PROCESS_ERROR = "eventOnProcessError";
+	public static final String ON_PROCESS_ERROR = "eventOnProcessError";
 	/**
 	 * Param for this event
 	 * 1 => Model raise event
-	 * . => Custom params
+	 * 2 => fieldChange: separate by ','
 	 */
-	public static String ON_CHANGE = "eventOnChange";
+	public static final String ON_CHANGE = "eventOnChange";
 
 	private Map<String, Set<Callback>> handlers = new HashMap<String, Set<Callback>>();
 
-	void register(String event, Callback callback) {
+	void on(String event, Callback callback) {
 		Set<Callback> set = null;
 		if(!handlers.containsKey(event)) {
 			set = new LinkedHashSet<Callback>();
@@ -60,20 +57,14 @@ public abstract class Model {
 		set.add(callback);
 		handlers.put(event, set);
 	}
-	void unregister(String event, Callback callback) {
-		if(handlers.containsKey(event)) {
-			return;
-		}
-
-		Set<Callback> set = handlers.get(event);
-		set.remove(callback);
-		handlers.put(event, set);
-	}
-	void unregister(String event) {
+	void off(String event) {
 		if(handlers.containsKey(event)) {
 			return;
 		}
 		handlers.remove(event);
+	}
+	void off() {
+		this.handlers.clear();
 	}
 
 	protected void trigger(String eventName, Object... params) {
@@ -94,14 +85,12 @@ public abstract class Model {
 		 * Param for this event:
 		 * 1 => Model raise event
 		 * 2 => Child object
-		 * . => custom params
 		 */
 		public static final String ON_ADD = "onAdd";
 		/**
 		 * Param for this event
 		 * 1 => Model raise event
 		 * 2 => Child object
-		 * . => Custom params
 		 */
 		public static final String ON_REMOVE = "onRemove";
 
@@ -110,12 +99,12 @@ public abstract class Model {
 		public void add(T child) {
 			this.children.add(child);
 			trigger(ON_ADD, this, child);
-			trigger(ON_CHANGE, this);
+			trigger(ON_CHANGE, this, "");
 		}
 		public void remove(T child) {
 			if(this.children.remove(child)) {
 				trigger(ON_REMOVE, this, child);
-				trigger(ON_CHANGE, this);
+				trigger(ON_CHANGE, this, "");
 			}
 		}
 	}

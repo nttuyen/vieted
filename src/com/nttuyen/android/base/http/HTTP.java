@@ -130,9 +130,8 @@ public class HTTP {
 			int statusCode = status.getStatusCode();
 			String statusString = status.getReasonPhrase();
 
-			//TODO: we should hand all 2xx code as success
 			Response response = null;
-			if(statusCode == 200) {
+			if(statusCode >= 200 && statusCode < 300) {
 				HttpEntity entity = res.getEntity();
 				result = entity.getContent();
 
