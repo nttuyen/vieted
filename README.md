@@ -1,4 +1,0 @@
-vieted
-======
-
-VietEd android
