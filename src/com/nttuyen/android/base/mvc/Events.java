@@ -30,6 +30,40 @@ public class Events {
 		}
 	}
 
+	public static void registerAllEvents(Model model, Object target) {
+		if(model == null || target == null) {
+			return;
+		}
+		//Clean all old eventListener
+		Events.off(model);
+
+		Class type = target.getClass();
+
+		//All method declared at current class is high priority
+		Method[] methods = type.getDeclaredMethods();
+		Set<String> registered = new HashSet<String>();
+		for(Method method : methods) {
+			EventListener eventListener = method.getAnnotation(EventListener.class);
+			if(eventListener != null && eventListener.event() != null && !"".equals(eventListener.event())) {
+				String event = eventListener.event();
+				Events.on(model, event, method, target);
+				registered.add(event);
+			}
+		}
+
+		//All public method should be load but do not override
+		methods = type.getMethods();
+		for(Method method : methods) {
+			EventListener eventListener = method.getAnnotation(EventListener.class);
+			if(eventListener != null && eventListener.event() != null && !"".equals(eventListener.event())) {
+				String event = eventListener.event();
+				if(!registered.contains(event)) {
+					Events.on(model, event, method, target);
+				}
+			}
+		}
+	}
+
 	public static void off(Model model, String event) {
 		if(model != null) {
 			model.off(event);

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.LinearLayout;
-import com.nttuyen.android.base.Callback;
 import com.nttuyen.android.base.mvc.EventListener;
 import com.nttuyen.android.base.mvc.Events;
 import com.nttuyen.android.base.mvc.Model;
@@ -14,10 +13,6 @@ import com.nttuyen.android.base.mvc.Presenter;
 import com.nttuyen.android.base.utils.UIContextHelper;
 import com.nttuyen.android.base.widget.ActionBar;
 import com.vieted.android.app.R;
-
-import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author nttuyen266@gmail.com
@@ -50,7 +45,7 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 		final Model model = this.getModel();
 		if(model != null) {
 			//Register all event listener
-			this.registerEventListener();
+			this.registerAllEvents();
 
 			//TODO: should we call model.fetch() here
 			//We should let to concrete activity call it onStart()
@@ -156,37 +151,12 @@ public abstract class BaseActivity extends FragmentActivity implements Presenter
 			Events.on(model, event, method, this);
 		}
 	}
-	protected void registerEventListener() {
+	protected void registerAllEvents() {
 		Model model = this.getModel();
 		if(model == null) {
 			return;
 		}
 
-		//Clean all old eventListener
-		Events.off(model);
-
-		//All method declared at current class is high priority
-		Method[] methods = this.getClass().getDeclaredMethods();
-		Set<String> registered = new HashSet<String>();
-		for(Method method : methods) {
-			EventListener eventListener = method.getAnnotation(EventListener.class);
-			if(eventListener != null && eventListener.event() != null && !"".equals(eventListener.event())) {
-				String event = eventListener.event();
-				Events.on(model, event, method, this);
-				registered.add(event);
-			}
-		}
-
-		//All public method should be load but do not override
-		methods = this.getClass().getMethods();
-		for(Method method : methods) {
-			EventListener eventListener = method.getAnnotation(EventListener.class);
-			if(eventListener != null && eventListener.event() != null && !"".equals(eventListener.event())) {
-				String event = eventListener.event();
-				if(!registered.contains(event)) {
-					Events.on(model, event, method, this);
-				}
-			}
-		}
+		Events.registerAllEvents(model, this);
 	}
 }
