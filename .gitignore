@@ -23,3 +23,6 @@ local.properties
 /VietEd.iml
 /out
 /vieted.iml
+*.iml
+target/
+gen-*/
