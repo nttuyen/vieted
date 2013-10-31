@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello vieted!</string>
     <string name="app_name">vieted</string>
+	<string name="umon_widget_actionbar_activity_not_found">Failed to open intent...</string>
 </resources>

@@ -9,8 +9,8 @@
     <name>vieted</name>
 
 	<properties>
-		<android.version>2.1.2</android.version>
-		<android.sdk.version>7</android.sdk.version>
+		<android.version>2.2.1</android.version>
+		<android.sdk.version>8</android.sdk.version>
 		<android.sdk.path>${evn.ANDROID_HOME}</android.sdk.path>
 		<umon.version>0.1-SNAPSHOT</umon.version>
 	</properties>
@@ -27,12 +27,12 @@
 			<artifactId>core</artifactId>
 			<version>${umon.version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.nttuyen.android.umon</groupId>
 			<artifactId>widget</artifactId>
 			<type>apklib</type>
 			<version>${umon.version}</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>support-v4</artifactId>
@@ -58,6 +58,7 @@
                     <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                     <sdk>
                         <platform>${android.sdk.version}</platform>
+						<path>/home/nttuyen/java/ide/android-sdk-linux</path>
                     </sdk>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>
