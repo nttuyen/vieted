@@ -47,9 +47,6 @@ public abstract class BaseActivity extends ModelFragmentActivity {
 		super.onStart();
 		final Model model = this.getModel();
 		if(model != null) {
-			//Register all event listener
-			Events.registerAllEvents(model, this);
-
 			//TODO: should we call model.fetch() here
 			//We should let to concrete activity call it onStart()
 			model.fetch();
@@ -88,13 +85,6 @@ public abstract class BaseActivity extends ModelFragmentActivity {
 	}
 
 	//Event
-	/**
-	 * Update view when model change
-	 */
-	@ModelEventListener(events = {Model.ON_CHANGE})
-	public void onModelUpdate() {
-
-	}
 	@ModelEventListener(events = {Model.ON_PROCESS_START})
 	public void onProcessStart() {
 		contextHelper.showLoading();
@@ -102,7 +92,6 @@ public abstract class BaseActivity extends ModelFragmentActivity {
 	@ModelEventListener(events = {Model.ON_PROCESS_COMPLETED})
 	public void onProcessComplete() {
 		contextHelper.dismissLoading();
-		onModelUpdate();
 		showBodyView();
 	}
 	@ModelEventListener(events = {Model.ON_PROCESS_ERROR})

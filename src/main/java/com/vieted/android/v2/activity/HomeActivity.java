@@ -17,12 +17,16 @@ public class HomeActivity extends BaseActivity {
 		this.actionBar.setTitle("VietEd");
 
 		//Init body view and model
-		this.setBodyView(R.layout.activity_body_home);
+		this.setBodyView(R.layout.body_home);
 		this.setModel(new VoidModel());
 	}
 
 	@UIOnclick(views = {R.id.buttonMyCourse, R.id.buttonListCourse, R.id.buttonProfile, R.id.buttonPayment})
 	public void onButtonClick(Button button) {
-		contextHelper.showErrDialog("OnClick", "You have click on button: " + button.getText());
+		if(button.getId() == R.id.buttonMyCourse || button.getId() == R.id.buttonListCourse) {
+			go(ListCourseActivity.class);
+		} else {
+			contextHelper.showErrDialog("OnClick", "You have click on button: " + button.getText());
+		}
 	}
 }
