@@ -1,9 +1,7 @@
 package com.vieted.android.v2.activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import com.nttuyen.android.umon.core.mvc.Model;
 import com.nttuyen.android.umon.core.ui.UIOnclick;
 import com.vieted.android.v2.R;
 import com.vieted.android.v2.model.VoidModel;
@@ -12,7 +10,6 @@ import com.vieted.android.v2.model.VoidModel;
  * @author nttuyen266@gmail.com
  */
 public class HomeActivity extends BaseActivity {
-	private VoidModel model;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

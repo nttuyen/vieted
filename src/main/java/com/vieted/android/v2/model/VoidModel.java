@@ -34,6 +34,11 @@ public class VoidModel extends Model {
 	}
 
 	@Override
+	public <K> K getId() {
+		return null;
+	}
+
+	@Override
 	public void save() {
 		throw new UnsupportedOperationException("un-supported");
 	}

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import com.nttuyen.android.umon.core.ui.UIContextHelper;
 import com.vieted.android.v2.R;
 
 /**
@@ -30,7 +31,7 @@ public class Mp3Player extends RelativeLayout implements View.OnClickListener, M
     private boolean isPlaying = false;
 
     protected Listener listener;
-    protected final UIContextHelper contextHelper;
+    protected final UIContextHelper contextHelper = new UIContextHelper(this.getContext());
 
     public Mp3Player(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -44,7 +45,6 @@ public class Mp3Player extends RelativeLayout implements View.OnClickListener, M
         this.playerButton.setOnClickListener(this);
 
         this.mediaPlayer = null;
-        this.contextHelper = new UIContextHelper(this.getContext());
     }
 
     public void setDataSource(String datasource) {

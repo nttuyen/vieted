@@ -11,7 +11,7 @@ import com.nttuyen.android.umon.core.mvc.Events;
 import com.nttuyen.android.umon.core.mvc.Model;
 import com.nttuyen.android.umon.core.mvc.ModelEventListener;
 import com.nttuyen.android.umon.core.mvc.Presenter;
-import com.nttuyen.android.umon.core.ui.AnnotationFragmentActivity;
+import com.nttuyen.android.umon.core.ui.ModelFragmentActivity;
 import com.nttuyen.android.umon.core.ui.UIContextHelper;
 import com.nttuyen.android.umon.core.ui.UIEvents;
 import com.nttuyen.android.umon.core.ui.UIOnclick;
@@ -21,7 +21,7 @@ import com.vieted.android.v2.R;
 /**
  * @author nttuyen266@gmail.com
  */
-public abstract class BaseActivity extends AnnotationFragmentActivity {
+public abstract class BaseActivity extends ModelFragmentActivity {
 	protected ActionBar actionBar;
 	protected LinearLayout bodyLayout;
 	protected View bodyView;
@@ -48,7 +48,7 @@ public abstract class BaseActivity extends AnnotationFragmentActivity {
 		final Model model = this.getModel();
 		if(model != null) {
 			//Register all event listener
-			this.registerModelEvents();
+			Events.registerAllEvents(model, this);
 
 			//TODO: should we call model.fetch() here
 			//We should let to concrete activity call it onStart()
@@ -91,21 +91,21 @@ public abstract class BaseActivity extends AnnotationFragmentActivity {
 	/**
 	 * Update view when model change
 	 */
-	@ModelEventListener(event = Model.ON_CHANGE)
+	@ModelEventListener(events = {Model.ON_CHANGE})
 	public void onModelUpdate() {
 
 	}
-	@ModelEventListener(event = Model.ON_PROCESS_START)
+	@ModelEventListener(events = {Model.ON_PROCESS_START})
 	public void onProcessStart() {
 		contextHelper.showLoading();
 	}
-	@ModelEventListener(event = Model.ON_PROCESS_COMPLETED)
+	@ModelEventListener(events = {Model.ON_PROCESS_COMPLETED})
 	public void onProcessComplete() {
 		contextHelper.dismissLoading();
 		onModelUpdate();
 		showBodyView();
 	}
-	@ModelEventListener(event = Model.ON_PROCESS_ERROR)
+	@ModelEventListener(events = {Model.ON_PROCESS_ERROR})
 	public void onProcessError(Model m, String process, int errorCode, String errorString, String errorMessage) {
 		contextHelper.dismissLoading();
 		contextHelper.showErrDialog(errorString, errorMessage);
